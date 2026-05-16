@@ -20,6 +20,7 @@ public record CreateRecipeRequest(
         @Min(0) Integer preparationTimeMinutes,
         @Min(0) Integer cookingTimeMinutes,
         @Size(max = 100) String category,
+        @DecimalMin("0.01") BigDecimal sellingPrice,
         @Valid List<RecipeIngredientRequest> ingredients,
         @Valid List<RecipeSubRecipeRequest> subRecipes,
         @Valid List<RecipeStepRequest> steps

@@ -64,6 +64,14 @@ export function useUpdateRecipeStatus() {
   });
 }
 
+export function useRecipeCost(id: string | null) {
+  return useQuery({
+    queryKey: ['recipe-cost', id],
+    queryFn: () => recipesApi.getCost(id!),
+    enabled: !!id,
+  });
+}
+
 export function useDeleteRecipe() {
   const queryClient = useQueryClient();
   return useMutation({

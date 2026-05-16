@@ -51,6 +51,9 @@ public class Recipe extends BaseEntity {
     @Column(name = "category", length = 100)
     private String category;
 
+    @Column(name = "selling_price", precision = 10, scale = 2)
+    private BigDecimal sellingPrice;
+
     @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<RecipeIngredient> ingredients = new ArrayList<>();
 

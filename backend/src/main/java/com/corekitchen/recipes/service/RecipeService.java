@@ -71,9 +71,12 @@ public class RecipeService {
     }
 
     public RecipeDto getById(UUID id, UUID orgId) {
-        Recipe recipe = recipeRepository.findByIdAndOrganizationId(id, orgId)
+        return RecipeDto.from(findEntityById(id, orgId));
+    }
+
+    public Recipe findEntityById(UUID id, UUID orgId) {
+        return recipeRepository.findByIdAndOrganizationId(id, orgId)
                 .orElseThrow(() -> new EntityNotFoundException("Recipe not found: " + id));
-        return RecipeDto.from(recipe);
     }
 
     @Transactional
@@ -84,7 +87,8 @@ public class RecipeService {
         Recipe recipe = new Recipe();
         recipe.setOrganization(organization);
         applyFields(recipe, req.name(), req.description(), req.status(), req.yieldQuantity(),
-                req.yieldUnit(), req.preparationTimeMinutes(), req.cookingTimeMinutes(), req.category());
+                req.yieldUnit(), req.preparationTimeMinutes(), req.cookingTimeMinutes(), req.category(),
+                req.sellingPrice());
 
         applyIngredients(recipe, req.ingredients(), orgId);
         applySubRecipes(recipe, req.subRecipes(), orgId, null);
@@ -100,7 +104,8 @@ public class RecipeService {
                 .orElseThrow(() -> new EntityNotFoundException("Recipe not found: " + id));
 
         applyFields(recipe, req.name(), req.description(), req.status(), req.yieldQuantity(),
-                req.yieldUnit(), req.preparationTimeMinutes(), req.cookingTimeMinutes(), req.category());
+                req.yieldUnit(), req.preparationTimeMinutes(), req.cookingTimeMinutes(), req.category(),
+                req.sellingPrice());
 
         recipe.getIngredients().clear();
         recipe.getSubRecipes().clear();
@@ -136,7 +141,8 @@ public class RecipeService {
 
     private void applyFields(Recipe recipe, String name, String description, RecipeStatus status,
                               java.math.BigDecimal yieldQuantity, String yieldUnit,
-                              Integer preparationTimeMinutes, Integer cookingTimeMinutes, String category) {
+                              Integer preparationTimeMinutes, Integer cookingTimeMinutes,
+                              String category, java.math.BigDecimal sellingPrice) {
         recipe.setName(name);
         recipe.setDescription(description);
         recipe.setStatus(status != null ? status : RecipeStatus.DRAFT);
@@ -145,6 +151,7 @@ public class RecipeService {
         recipe.setPreparationTimeMinutes(preparationTimeMinutes);
         recipe.setCookingTimeMinutes(cookingTimeMinutes);
         recipe.setCategory(category);
+        recipe.setSellingPrice(sellingPrice);
     }
 
     private void applyIngredients(Recipe recipe, List<RecipeIngredientRequest> reqs, UUID orgId) {

@@ -1,0 +1,24 @@
+# Large local data exports
+FoodData_Central_*.json
+*.csv
+*.tsv
+
+# Dependencies and generated output
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+frontend/build/
+frontend/coverage/
+frontend/.turbo/
+backend/target/
+
+# Local config and logs
+.env
+.env.local
+*.env.local
+*.log
+
+# OS / editor noise
+.DS_Store
+.vscode/
+.idea/

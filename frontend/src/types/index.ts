@@ -98,6 +98,7 @@ export interface Recipe {
   preparationTimeMinutes: number | null;
   cookingTimeMinutes: number | null;
   category: string | null;
+  sellingPrice: number | null;
   ingredients: RecipeIngredient[];
   subRecipes: RecipeSubRecipe[];
   steps: RecipeStep[];
@@ -105,6 +106,20 @@ export interface Recipe {
   organizationId: string;
   createdAt: string;
   updatedAt: string;
+}
+
+export interface CostLine {
+  name: string;
+  quantity: number;
+  unit: string;
+  lineCost: number;
+}
+
+export interface RecipeCostDto {
+  totalCost: number;
+  costPerPortion: number | null;
+  foodCostPercentage: number | null;
+  lines: CostLine[];
 }
 
 export interface RecipePage {
@@ -125,6 +140,7 @@ export interface CreateRecipeRequest {
   preparationTimeMinutes?: number;
   cookingTimeMinutes?: number;
   category?: string;
+  sellingPrice?: number;
   ingredients?: { ingredientId: string; quantity: number; unit: string }[];
   subRecipes?: { subRecipeId: string; quantity: number }[];
   steps?: { stepNumber: number; description: string }[];

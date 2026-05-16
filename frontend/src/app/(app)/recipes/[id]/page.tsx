@@ -7,6 +7,7 @@ import { Select } from '@/components/ui/Select';
 import { Badge } from '@/components/ui/Badge';
 import { RecipeStatusBadge } from '@/components/recipes/RecipeStatusBadge';
 import { useRecipe, useUpdateRecipeStatus } from '@/hooks/useRecipes';
+import RecipeCostCard from '@/components/recipes/RecipeCostCard';
 import type { RecipeStatus } from '@/types';
 
 const SECTION_HEADING = 'text-sm font-semibold text-gray-500 uppercase tracking-wider border-b pb-2 mb-4';
@@ -183,6 +184,9 @@ export default function RecipeDetailPage() {
           </ol>
         </div>
       )}
+
+      {/* Cost */}
+      <RecipeCostCard recipeId={recipe.id} />
 
       {/* Allergens */}
       {recipe.allergens.length > 0 && (

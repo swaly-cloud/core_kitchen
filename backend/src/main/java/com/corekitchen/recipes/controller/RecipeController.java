@@ -1,6 +1,8 @@
 package com.corekitchen.recipes.controller;
 
 import com.corekitchen.auth.jwt.AuthenticatedUser;
+import com.corekitchen.costs.dto.RecipeCostDto;
+import com.corekitchen.costs.service.CostService;
 import com.corekitchen.recipes.dto.*;
 import com.corekitchen.recipes.service.RecipeService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -9,6 +11,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
@@ -21,6 +24,7 @@ import java.util.UUID;
 public class RecipeController {
 
     private final RecipeService recipeService;
+    private final CostService costService;
 
     @GetMapping
     public RecipePageResponse list(
@@ -68,6 +72,15 @@ public class RecipeController {
             @AuthenticationPrincipal AuthenticatedUser principal
     ) {
         return recipeService.updateStatus(id, req, principal.organizationId());
+    }
+
+    @GetMapping("/{id}/cost")
+    @Transactional(readOnly = true)
+    public RecipeCostDto getCost(
+            @PathVariable UUID id,
+            @AuthenticationPrincipal AuthenticatedUser principal
+    ) {
+        return costService.computeCost(recipeService.findEntityById(id, principal.organizationId()));
     }
 
     @DeleteMapping("/{id}")

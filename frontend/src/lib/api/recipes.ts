@@ -1,5 +1,5 @@
 import { api } from './client';
-import type { Recipe, RecipePage, CreateRecipeRequest, UpdateRecipeRequest, RecipeStatus } from '@/types';
+import type { Recipe, RecipePage, RecipeCostDto, CreateRecipeRequest, UpdateRecipeRequest, RecipeStatus } from '@/types';
 
 export interface RecipeListParams {
   page?: number;
@@ -23,4 +23,6 @@ export const recipesApi = {
     api.patch<Recipe>(`/api/recipes/${id}/status`, { status }).then(r => r.data),
   delete: (id: string) =>
     api.delete(`/api/recipes/${id}`),
+  getCost: (id: string) =>
+    api.get<RecipeCostDto>(`/api/recipes/${id}/cost`).then(r => r.data),
 };

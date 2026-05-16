@@ -13,9 +13,9 @@ Les fondations sont en place : authentification JWT, multi-tenancy strict (Organ
 | Phase | Module | Statut |
 |------|---------|--------|
 | 1 | Auth + multi-tenant + profile | ✅ Livré |
-| 2 | Gestion des ingrédients | ⏳ À venir |
-| 3 | Recettes & sous-recettes | ⏳ À venir |
-| 4 | Cost engine | ⏳ À venir |
+| 2 | Gestion des ingrédients | ✅ Livré |
+| 3 | Recettes & sous-recettes | ✅ Livré |
+| 4 | Cost engine | ✅ Livré |
 | 5 | Calculs nutritionnels | ⏳ À venir |
 | 6 | Dashboard avancé | ⏳ À venir |
 
@@ -126,8 +126,9 @@ Toutes paramétrables via `.env` à la racine (voir `.env.example`) :
 | `JWT_REFRESH_TTL_DAYS` | Durée refresh token | `7` jours |
 | `NEXT_PUBLIC_API_URL` | URL backend pour le frontend | `http://localhost:8080` |
 
-## 🧭 Endpoints disponibles (Phase 1)
+## 🧭 Endpoints disponibles
 
+### Phase 1 — Auth & Profil
 ```
 POST  /api/auth/register      → Crée organization + user ADMIN, renvoie tokens
 POST  /api/auth/login         → Authentifie, renvoie tokens
@@ -138,6 +139,34 @@ GET   /api/users/me           → Utilisateur connecté
 PATCH /api/users/me           → Update profil (firstName, lastName)
 POST  /api/users/me/password  → Change mot de passe
 ```
+
+### Phase 2 — Ingrédients
+```
+GET    /api/ingredients        → Liste paginée (search, sort, filtre catégorie)
+POST   /api/ingredients        → Créer un ingrédient
+GET    /api/ingredients/{id}   → Détail
+PUT    /api/ingredients/{id}   → Modifier
+DELETE /api/ingredients/{id}   → Supprimer
+```
+
+### Phase 3 — Recettes
+```
+GET    /api/recipes            → Liste paginée (search, status, sort)
+POST   /api/recipes            → Créer une recette
+GET    /api/recipes/{id}       → Détail (ingrédients, sous-recettes, étapes, allergènes)
+PUT    /api/recipes/{id}       → Modifier
+PATCH  /api/recipes/{id}/status → Changer le statut (DRAFT / PUBLISHED / ARCHIVED)
+DELETE /api/recipes/{id}       → Supprimer
+```
+
+### Phase 4 — Cost Engine
+```
+GET    /api/recipes/{id}/cost  → Coût calculé à la volée
+                                  { totalCost, costPerPortion, foodCostPercentage, lines[] }
+```
+
+> **Devise** : TND (Dinar Tunisien). Le champ `sellingPrice` (optionnel) sur les recettes active le calcul du food cost %.
+> Les unités supportées : KG, G, L, ML, CL (conversion automatique), PIECE, BUNCH, PORTION (pas de conversion inter-famille).
 
 Toutes les routes protégées attendent `Authorization: Bearer <accessToken>`. Voir Swagger UI pour les schémas détaillés.
 

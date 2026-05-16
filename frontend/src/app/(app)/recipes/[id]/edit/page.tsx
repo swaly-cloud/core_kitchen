@@ -24,6 +24,7 @@ const schema = z.object({
   yieldUnit: z.string().min(1, 'Unité requise'),
   preparationTimeMinutes: z.coerce.number().int().min(0).optional().nullable(),
   cookingTimeMinutes: z.coerce.number().int().min(0).optional().nullable(),
+  sellingPrice: z.coerce.number().min(0.01).optional().nullable(),
   ingredients: z.array(z.object({
     ingredientId: z.string().min(1, 'Ingrédient requis'),
     quantity: z.coerce.number().positive('Quantité doit être positive'),
@@ -84,6 +85,7 @@ export default function EditRecipePage() {
       yieldUnit: 'portions',
       preparationTimeMinutes: null,
       cookingTimeMinutes: null,
+      sellingPrice: null,
       ingredients: [],
       subRecipes: [],
       steps: [],
@@ -102,6 +104,7 @@ export default function EditRecipePage() {
         yieldUnit: recipe.yieldUnit,
         preparationTimeMinutes: recipe.preparationTimeMinutes,
         cookingTimeMinutes: recipe.cookingTimeMinutes,
+        sellingPrice: recipe.sellingPrice ?? null,
         ingredients: recipe.ingredients.map(ing => ({
           ingredientId: ing.ingredientId,
           quantity: ing.quantity,
@@ -153,6 +156,7 @@ export default function EditRecipePage() {
       category: values.category || undefined,
       preparationTimeMinutes: values.preparationTimeMinutes ?? undefined,
       cookingTimeMinutes: values.cookingTimeMinutes ?? undefined,
+      sellingPrice: values.sellingPrice ?? undefined,
       ingredients: values.ingredients,
       subRecipes: values.subRecipes,
       steps: values.steps,
@@ -267,6 +271,17 @@ export default function EditRecipePage() {
                 />
               </FormField>
             </div>
+
+            <FormField id="sellingPrice" label="Prix de vente (TND)" error={errors.sellingPrice?.message}>
+              <Input
+                id="sellingPrice"
+                type="number"
+                min="0"
+                step="0.01"
+                {...register('sellingPrice')}
+                placeholder="Ex : 12.500"
+              />
+            </FormField>
           </div>
         </div>
 
