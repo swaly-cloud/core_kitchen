@@ -1,0 +1,14 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: validate
+  flyway:
+    enabled: true
+
+corekitchen:
+  jwt:
+    secret: test-secret-please-only-for-tests-32-bytes-min-required-here-ok
+    access-ttl-minutes: 15
+    refresh-ttl-days: 7
+  cors:
+    allowed-origins: http://localhost:3000
