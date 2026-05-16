@@ -7,15 +7,23 @@ interface FormFieldProps {
   error?: string;
   children: ReactNode;
   hint?: string;
+  optional?: boolean;
 }
 
-export function FormField({ id, label, error, hint, children }: FormFieldProps) {
+export function FormField({ id, label, error, hint, optional, children }: FormFieldProps) {
   return (
     <div>
-      <Label htmlFor={id}>{label}</Label>
+      <div className="flex items-baseline justify-between">
+        <Label htmlFor={id}>{label}</Label>
+        {optional && (
+          <span className="text-2xs text-stone-400 font-medium">optional</span>
+        )}
+      </div>
       {children}
-      {hint && !error ? <p className="text-xs text-zinc-500 mt-1.5">{hint}</p> : null}
-      {error ? <p className="text-xs text-red-600 mt-1.5">{error}</p> : null}
+      {hint && !error ? (
+        <p className="text-xs text-stone-500 mt-1.5">{hint}</p>
+      ) : null}
+      {error ? <p className="text-xs text-danger mt-1.5">{error}</p> : null}
     </div>
   );
 }

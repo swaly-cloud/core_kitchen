@@ -13,13 +13,13 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       <select
         ref={ref}
         className={cn(
-          'flex h-10 w-full rounded-md border bg-white px-3 py-2 text-sm',
-          'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-1',
-          'disabled:cursor-not-allowed disabled:opacity-50',
-          'appearance-none bg-[url("data:image/svg+xml,%3csvg xmlns=\'http://www.w3.org/2000/svg\' fill=\'none\' viewBox=\'0 0 20 20\'%3e%3cpath stroke=\'%236b7280\' stroke-linecap=\'round\' stroke-linejoin=\'round\' stroke-width=\'1.5\' d=\'M6 8l4 4 4-4\'/%3e%3c/svg%3e")] bg-[right_0.5rem_center] bg-no-repeat pr-8',
+          'flex h-10 w-full rounded-lg border bg-white px-3.5 py-2 text-sm text-stone-900 transition-colors',
+          'focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brand-500/15 focus-visible:border-brand-500',
+          'disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-stone-50',
+          'appearance-none bg-[url("data:image/svg+xml,%3csvg xmlns=\'http://www.w3.org/2000/svg\' fill=\'none\' viewBox=\'0 0 20 20\'%3e%3cpath stroke=\'%237c786f\' stroke-linecap=\'round\' stroke-linejoin=\'round\' stroke-width=\'1.5\' d=\'M6 8l4 4 4-4\'/%3e%3c/svg%3e")] bg-[right_0.65rem_center] bg-no-repeat pr-9',
           error
-            ? 'border-red-400 focus-visible:ring-red-500'
-            : 'border-zinc-200 focus-visible:ring-brand-600',
+            ? 'border-danger/60 focus-visible:border-danger focus-visible:ring-danger/15'
+            : 'border-stone-200 hover:border-stone-300',
           className
         )}
         {...props}

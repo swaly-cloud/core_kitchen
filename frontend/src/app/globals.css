@@ -1,23 +1,53 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    --bg: #fafafa;
-    --fg: #0a0a0a;
-    --muted: #71717a;
-    --border: #e4e4e7;
+    --bg: #f7f4ed;
+    --fg: #1a1a14;
+    --muted: #7c786f;
+    --border: #e7e4dd;
     --card: #ffffff;
+    --brand: #6fa060;
+    --forest: #2f3e33;
   }
 
-  html, body {
+  html,
+  body {
     background-color: var(--bg);
     color: var(--fg);
     -webkit-font-smoothing: antialiased;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
 
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     box-sizing: border-box;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #d1cdc2;
+    border-radius: 999px;
+    border: 2px solid var(--bg);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #a8a39a;
+  }
+}
+
+@layer components {
+  .eyebrow {
+    @apply text-2xs font-semibold uppercase tracking-eyebrow text-stone-500;
   }
 }

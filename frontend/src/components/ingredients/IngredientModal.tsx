@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -17,17 +17,17 @@ import { Input } from '@/components/ui/Input';
 import { Select } from '@/components/ui/Select';
 import { FormField } from '@/components/ui/FormField';
 import { ALLERGEN_LABELS } from './AllergenBadge';
-import { useCreateIngredient, useUpdateIngredient } from '@/hooks/useIngredients';
+import { useCreateIngredient, useUpdateIngredient, useSearchUsda } from '@/hooks/useIngredients';
 import type { Ingredient, Unit, Allergen } from '@/types';
 
 const UNITS: { value: Unit; label: string }[] = [
-  { value: 'KG', label: 'Kilogramme (kg)' },
-  { value: 'G', label: 'Gramme (g)' },
-  { value: 'L', label: 'Litre (L)' },
-  { value: 'ML', label: 'Millilitre (ml)' },
-  { value: 'CL', label: 'Centilitre (cl)' },
-  { value: 'PIECE', label: 'Pièce' },
-  { value: 'BUNCH', label: 'Botte' },
+  { value: 'KG', label: 'Kilogram (kg)' },
+  { value: 'G', label: 'Gram (g)' },
+  { value: 'L', label: 'Liter (L)' },
+  { value: 'ML', label: 'Milliliter (ml)' },
+  { value: 'CL', label: 'Centiliter (cl)' },
+  { value: 'PIECE', label: 'Piece' },
+  { value: 'BUNCH', label: 'Bunch' },
   { value: 'PORTION', label: 'Portion' },
 ];
 
@@ -52,6 +52,10 @@ interface IngredientModalProps {
 
 export function IngredientModal({ open, onClose, ingredient }: IngredientModalProps) {
   const isEdit = !!ingredient;
+  const [tab, setTab] = useState<'manual' | 'usda'>('manual');
+  const [usdaQuery, setUsdaQuery] = useState('');
+  const { data: usdaResults, isLoading: usdaLoading } = useSearchUsda(usdaQuery);
+
   const createMutation = useCreateIngredient();
   const updateMutation = useUpdateIngredient();
   const isPending = createMutation.isPending || updateMutation.isPending;
@@ -61,6 +65,7 @@ export function IngredientModal({ open, onClose, ingredient }: IngredientModalPr
     handleSubmit,
     control,
     reset,
+    setValue,
     formState: { errors },
   } = useForm<FormValues>({
     resolver: zodResolver(schema),
@@ -96,6 +101,12 @@ export function IngredientModal({ open, onClose, ingredient }: IngredientModalPr
     }
   }, [open, ingredient, reset]);
 
+  const handleSelectUsda = (result: any) => {
+    setValue('name', result.name);
+    setTab('manual');
+    setUsdaQuery('');
+  };
+
   const onSubmit = async (values: FormValues) => {
     const payload = {
       name: values.name,
@@ -118,100 +129,203 @@ export function IngredientModal({ open, onClose, ingredient }: IngredientModalPr
     <Dialog open={open} onClose={onClose}>
       <DialogContent className="max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle>{isEdit ? 'Modifier l\'ingrédient' : 'Nouvel ingrédient'}</DialogTitle>
+          <DialogTitle>
+            {isEdit ? 'Edit ingredient' : 'New ingredient'}
+          </DialogTitle>
           <DialogCloseButton onClose={onClose} />
         </DialogHeader>
 
+        {!isEdit && (
+          <div className="flex gap-2 border-b border-stone-200 px-6">
+            <button
+              type="button"
+              onClick={() => setTab('manual')}
+              className={`px-3 py-3 text-sm font-medium border-b-2 transition-colors ${
+                tab === 'manual'
+                  ? 'border-brand-500 text-brand-600'
+                  : 'border-transparent text-stone-500 hover:text-stone-700'
+              }`}
+            >
+              Manual entry
+            </button>
+            <button
+              type="button"
+              onClick={() => setTab('usda')}
+              className={`px-3 py-3 text-sm font-medium border-b-2 transition-colors ${
+                tab === 'usda'
+                  ? 'border-brand-500 text-brand-600'
+                  : 'border-transparent text-stone-500 hover:text-stone-700'
+              }`}
+            >
+              Search USDA
+            </button>
+          </div>
+        )}
+
+        {tab === 'usda' && !isEdit && (
+          <div className="space-y-4 px-6 py-6">
+            <FormField id="usda-search" label="Search USDA FoodData Central">
+              <Input
+                id="usda-search"
+                placeholder="e.g., Cheddar cheese, butter..."
+                value={usdaQuery}
+                onChange={(e) => setUsdaQuery(e.target.value)}
+              />
+            </FormField>
+
+            {usdaLoading && (
+              <div className="text-center py-4 text-stone-500">Loading...</div>
+            )}
+
+            {usdaResults && usdaResults.length === 0 && usdaQuery && (
+              <div className="text-center py-4 text-stone-500">No results found</div>
+            )}
+
+            {usdaResults && usdaResults.length > 0 && (
+              <div className="space-y-2 max-h-96 overflow-y-auto">
+                {usdaResults.map((result) => (
+                  <button
+                    key={result.fdcId}
+                    type="button"
+                    onClick={() => handleSelectUsda(result)}
+                    className="w-full text-left p-3 rounded-lg border border-stone-200 hover:bg-stone-50 transition-colors"
+                  >
+                    <div className="font-medium text-stone-900">{result.name}</div>
+                    <div className="text-xs text-stone-500 mt-1">{result.dataType}</div>
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
+
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="space-y-4 px-6 py-5">
-            <FormField id="name" label="Nom" error={errors.name?.message}>
+          {tab === 'manual' && (
+            <div className="space-y-5 px-6 py-6">
+            <FormField id="name" label="Name *" error={errors.name?.message}>
               <Input
                 id="name"
                 {...register('name')}
                 error={!!errors.name}
-                placeholder="Ex : Farine de blé"
+                placeholder="Ex: Butter, unsalted AOP"
               />
             </FormField>
 
-            <FormField id="unit" label="Unité" error={errors.unit?.message}>
-              <Select id="unit" {...register('unit')} error={!!errors.unit}>
-                {UNITS.map(u => (
-                  <option key={u.value} value={u.value}>{u.label}</option>
-                ))}
-              </Select>
-            </FormField>
+            <div className="grid grid-cols-2 gap-4">
+              <FormField id="unit" label="Unit *" error={errors.unit?.message}>
+                <Select id="unit" {...register('unit')} error={!!errors.unit}>
+                  {UNITS.map((u) => (
+                    <option key={u.value} value={u.value}>
+                      {u.label}
+                    </option>
+                  ))}
+                </Select>
+              </FormField>
 
-            <FormField
-              id="costPerUnit"
-              label="Coût par unité (€)"
-              error={errors.costPerUnit?.message}
-            >
-              <Input
+              <FormField
                 id="costPerUnit"
-                type="number"
-                step="0.0001"
-                min="0"
-                {...register('costPerUnit')}
-                error={!!errors.costPerUnit}
-                placeholder="0.0000"
-              />
-            </FormField>
+                label="Cost / unit (TND) *"
+                error={errors.costPerUnit?.message}
+              >
+                <Input
+                  id="costPerUnit"
+                  type="number"
+                  step="0.0001"
+                  min="0"
+                  {...register('costPerUnit')}
+                  error={!!errors.costPerUnit}
+                  placeholder="0.0000"
+                />
+              </FormField>
+            </div>
 
-            <FormField id="category" label="Catégorie (optionnel)" error={errors.category?.message}>
-              <Input
+            <div className="grid grid-cols-2 gap-4">
+              <FormField
                 id="category"
-                {...register('category')}
-                placeholder="Ex : Produits laitiers"
-              />
-            </FormField>
+                label="Category"
+                error={errors.category?.message}
+                optional
+              >
+                <Input
+                  id="category"
+                  {...register('category')}
+                  placeholder="Dairy"
+                />
+              </FormField>
 
-            <FormField id="supplier" label="Fournisseur (optionnel)" error={errors.supplier?.message}>
-              <Input
+              <FormField
                 id="supplier"
-                {...register('supplier')}
-                placeholder="Ex : Metro"
-              />
-            </FormField>
+                label="Supplier"
+                error={errors.supplier?.message}
+                optional
+              >
+                <Input
+                  id="supplier"
+                  {...register('supplier')}
+                  placeholder="Bellevaire"
+                />
+              </FormField>
+            </div>
 
             <div>
-              <p className="mb-2 text-sm font-medium text-zinc-700">Allergènes</p>
+              <div className="text-2xs font-semibold uppercase tracking-eyebrow text-stone-500 mb-2">
+                Allergens
+              </div>
               <Controller
                 name="allergens"
                 control={control}
                 render={({ field }) => (
-                  <div className="grid grid-cols-2 gap-2 rounded-md border border-zinc-200 p-3">
-                    {ALL_ALLERGENS.map(allergen => (
-                      <label key={allergen} className="flex cursor-pointer items-center gap-2">
-                        <input
-                          type="checkbox"
-                          className="h-4 w-4 rounded border-zinc-300 accent-brand-600"
-                          checked={field.value?.includes(allergen) ?? false}
-                          onChange={e => {
-                            const current = field.value ?? [];
-                            if (e.target.checked) {
-                              field.onChange([...current, allergen]);
-                            } else {
-                              field.onChange(current.filter(a => a !== allergen));
-                            }
-                          }}
-                        />
-                        <span className="text-sm text-zinc-700">{ALLERGEN_LABELS[allergen]}</span>
-                      </label>
-                    ))}
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 rounded-lg border border-stone-200 p-3 bg-stone-50/40">
+                    {ALL_ALLERGENS.map((allergen) => {
+                      const checked = field.value?.includes(allergen) ?? false;
+                      return (
+                        <label
+                          key={allergen}
+                          className="flex cursor-pointer items-center gap-2"
+                        >
+                          <input
+                            type="checkbox"
+                            className="h-4 w-4 rounded border-stone-300 text-brand-500 focus:ring-2 focus:ring-brand-500/30"
+                            checked={checked}
+                            onChange={(e) => {
+                              const current = field.value ?? [];
+                              if (e.target.checked) {
+                                field.onChange([...current, allergen]);
+                              } else {
+                                field.onChange(
+                                  current.filter((a) => a !== allergen)
+                                );
+                              }
+                            }}
+                          />
+                          <span className="text-sm text-stone-700 capitalize">
+                            {ALLERGEN_LABELS[allergen]}
+                          </span>
+                        </label>
+                      );
+                    })}
                   </div>
                 )}
               />
             </div>
           </div>
+          )}
 
-          <DialogFooter>
-            <Button type="button" variant="secondary" onClick={onClose} disabled={isPending}>
-              Annuler
-            </Button>
-            <Button type="submit" loading={isPending}>
-              {isEdit ? 'Enregistrer' : 'Créer'}
-            </Button>
-          </DialogFooter>
+          {tab === 'manual' && (
+            <DialogFooter>
+              <Button
+                type="button"
+                variant="secondary"
+                onClick={onClose}
+                disabled={isPending}
+              >
+                Cancel
+              </Button>
+              <Button type="submit" loading={isPending}>
+                {isEdit ? 'Save changes' : 'Create ingredient'}
+              </Button>
+            </DialogFooter>
+          )}
         </form>
       </DialogContent>
     </Dialog>

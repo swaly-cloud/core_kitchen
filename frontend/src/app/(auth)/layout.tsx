@@ -12,9 +12,5 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
     if (token) router.replace("/dashboard");
   }, [router, token]);
 
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-zinc-50 to-zinc-100 p-4">
-      <div className="w-full max-w-md">{children}</div>
-    </div>
-  );
+  return <div className="min-h-screen bg-cream-100">{children}</div>;
 }

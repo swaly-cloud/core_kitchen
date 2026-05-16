@@ -4,33 +4,40 @@ import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/Card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/Card";
 import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
 import { FormField } from "@/components/ui/FormField";
 import { useAuthStore } from "@/stores/authStore";
 import { useChangePassword, useUpdateProfile } from "@/hooks/useAuth";
+import { getInitials } from "@/lib/utils";
 
 const profileSchema = z.object({
-  firstName: z.string().min(1, "Prénom requis").max(100),
-  lastName: z.string().min(1, "Nom requis").max(100),
+  firstName: z.string().min(1, "First name required").max(100),
+  lastName: z.string().min(1, "Last name required").max(100),
 });
 
 const passwordSchema = z
   .object({
-    oldPassword: z.string().min(1, "Mot de passe actuel requis"),
+    oldPassword: z.string().min(1, "Current password required"),
     newPassword: z
       .string()
-      .min(8, "8 caractères minimum")
-      .regex(/[a-z]/, "Au moins une minuscule")
-      .regex(/[A-Z]/, "Au moins une majuscule")
-      .regex(/\d/, "Au moins un chiffre")
-      .regex(/[^a-zA-Z0-9]/, "Au moins un caractère spécial"),
+      .min(8, "8 characters minimum")
+      .regex(/[a-z]/, "At least one lowercase")
+      .regex(/[A-Z]/, "At least one uppercase")
+      .regex(/\d/, "At least one number")
+      .regex(/[^a-zA-Z0-9]/, "At least one special character"),
     confirmPassword: z.string(),
   })
   .refine((d) => d.newPassword === d.confirmPassword, {
     path: ["confirmPassword"],
-    message: "Les mots de passe ne correspondent pas",
+    message: "Passwords do not match",
   });
 
 type ProfileValues = z.infer<typeof profileSchema>;
@@ -43,26 +50,55 @@ export default function ProfilePage() {
 
   const profileForm = useForm<ProfileValues>({
     resolver: zodResolver(profileSchema),
-    defaultValues: { firstName: user?.firstName ?? "", lastName: user?.lastName ?? "" },
+    defaultValues: {
+      firstName: user?.firstName ?? "",
+      lastName: user?.lastName ?? "",
+    },
   });
 
   useEffect(() => {
-    if (user) profileForm.reset({ firstName: user.firstName, lastName: user.lastName });
+    if (user)
+      profileForm.reset({ firstName: user.firstName, lastName: user.lastName });
   }, [user, profileForm]);
 
-  const passwordForm = useForm<PasswordValues>({ resolver: zodResolver(passwordSchema) });
+  const passwordForm = useForm<PasswordValues>({
+    resolver: zodResolver(passwordSchema),
+  });
 
   return (
     <div className="max-w-2xl mx-auto space-y-6">
       <div>
-        <h1 className="text-2xl font-semibold tracking-tight">Mon profil</h1>
-        <p className="text-zinc-500 mt-1">Gérez vos informations et votre mot de passe.</p>
+        <div className="text-2xs font-semibold uppercase tracking-eyebrow text-stone-500">
+          Account
+        </div>
+        <h1 className="mt-2 text-3xl sm:text-4xl font-bold tracking-tight text-stone-900">
+          Profile
+        </h1>
       </div>
+
+      {user && (
+        <div className="rounded-2xl border border-stone-200 bg-white p-5 shadow-card flex items-center gap-4">
+          <div className="h-14 w-14 rounded-full bg-brand-500 text-white flex items-center justify-center text-lg font-semibold">
+            {getInitials(user.firstName, user.lastName)}
+          </div>
+          <div className="min-w-0">
+            <div className="font-medium text-stone-900">
+              {user.firstName} {user.lastName}
+            </div>
+            <div className="text-sm text-stone-500 truncate">{user.email}</div>
+            <div className="text-2xs uppercase tracking-eyebrow text-stone-400 mt-1">
+              {user.role.toLowerCase()} · {user.organizationName}
+            </div>
+          </div>
+        </div>
+      )}
 
       <Card>
         <CardHeader>
-          <CardTitle>Informations</CardTitle>
-          <CardDescription>Visible par les autres membres de votre entreprise.</CardDescription>
+          <CardTitle>Information</CardTitle>
+          <CardDescription>
+            Visible to other members of your kitchen.
+          </CardDescription>
         </CardHeader>
         <CardContent>
           <form
@@ -71,11 +107,27 @@ export default function ProfilePage() {
             noValidate
           >
             <div className="grid grid-cols-2 gap-3">
-              <FormField id="firstName" label="Prénom" error={profileForm.formState.errors.firstName?.message}>
-                <Input id="firstName" error={!!profileForm.formState.errors.firstName} {...profileForm.register("firstName")} />
+              <FormField
+                id="firstName"
+                label="First name"
+                error={profileForm.formState.errors.firstName?.message}
+              >
+                <Input
+                  id="firstName"
+                  error={!!profileForm.formState.errors.firstName}
+                  {...profileForm.register("firstName")}
+                />
               </FormField>
-              <FormField id="lastName" label="Nom" error={profileForm.formState.errors.lastName?.message}>
-                <Input id="lastName" error={!!profileForm.formState.errors.lastName} {...profileForm.register("lastName")} />
+              <FormField
+                id="lastName"
+                label="Last name"
+                error={profileForm.formState.errors.lastName?.message}
+              >
+                <Input
+                  id="lastName"
+                  error={!!profileForm.formState.errors.lastName}
+                  {...profileForm.register("lastName")}
+                />
               </FormField>
             </div>
 
@@ -84,7 +136,7 @@ export default function ProfilePage() {
             </FormField>
 
             <Button type="submit" loading={updateProfile.isPending}>
-              Mettre à jour
+              Save changes
             </Button>
           </form>
         </CardContent>
@@ -92,8 +144,8 @@ export default function ProfilePage() {
 
       <Card>
         <CardHeader>
-          <CardTitle>Mot de passe</CardTitle>
-          <CardDescription>Modifiez votre mot de passe régulièrement.</CardDescription>
+          <CardTitle>Password</CardTitle>
+          <CardDescription>Update your password regularly.</CardDescription>
         </CardHeader>
         <CardContent>
           <form
@@ -106,23 +158,49 @@ export default function ProfilePage() {
             className="space-y-4"
             noValidate
           >
-            <FormField id="oldPassword" label="Mot de passe actuel" error={passwordForm.formState.errors.oldPassword?.message}>
-              <Input id="oldPassword" type="password" autoComplete="current-password" error={!!passwordForm.formState.errors.oldPassword} {...passwordForm.register("oldPassword")} />
+            <FormField
+              id="oldPassword"
+              label="Current password"
+              error={passwordForm.formState.errors.oldPassword?.message}
+            >
+              <Input
+                id="oldPassword"
+                type="password"
+                autoComplete="current-password"
+                error={!!passwordForm.formState.errors.oldPassword}
+                {...passwordForm.register("oldPassword")}
+              />
             </FormField>
             <FormField
               id="newPassword"
-              label="Nouveau mot de passe"
+              label="New password"
               error={passwordForm.formState.errors.newPassword?.message}
-              hint="8 caractères min., 1 majuscule, 1 chiffre, 1 caractère spécial"
+              hint="8+ chars, 1 uppercase, 1 number, 1 special char"
             >
-              <Input id="newPassword" type="password" autoComplete="new-password" error={!!passwordForm.formState.errors.newPassword} {...passwordForm.register("newPassword")} />
+              <Input
+                id="newPassword"
+                type="password"
+                autoComplete="new-password"
+                error={!!passwordForm.formState.errors.newPassword}
+                {...passwordForm.register("newPassword")}
+              />
             </FormField>
-            <FormField id="confirmPassword" label="Confirmation" error={passwordForm.formState.errors.confirmPassword?.message}>
-              <Input id="confirmPassword" type="password" autoComplete="new-password" error={!!passwordForm.formState.errors.confirmPassword} {...passwordForm.register("confirmPassword")} />
+            <FormField
+              id="confirmPassword"
+              label="Confirm new password"
+              error={passwordForm.formState.errors.confirmPassword?.message}
+            >
+              <Input
+                id="confirmPassword"
+                type="password"
+                autoComplete="new-password"
+                error={!!passwordForm.formState.errors.confirmPassword}
+                {...passwordForm.register("confirmPassword")}
+              />
             </FormField>
 
             <Button type="submit" loading={changePassword.isPending}>
-              Changer le mot de passe
+              Change password
             </Button>
           </form>
         </CardContent>
