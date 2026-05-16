@@ -35,11 +35,13 @@ export default function AppLayout({ children }: { children: ReactNode }) {
   }
 
   return (
-    <div className="min-h-screen flex">
+    <div className="min-h-screen flex bg-cream-100">
       <Sidebar />
       <div className="flex-1 flex flex-col min-w-0">
         <Topbar />
-        <main className="flex-1 p-8 overflow-auto">{children}</main>
+        <main className="flex-1 px-4 sm:px-6 lg:px-10 py-6 lg:py-8 overflow-auto">
+          <div className="mx-auto max-w-7xl">{children}</div>
+        </main>
       </div>
     </div>
   );

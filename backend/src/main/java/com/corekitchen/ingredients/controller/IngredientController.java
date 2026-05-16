@@ -6,6 +6,9 @@ import com.corekitchen.ingredients.dto.IngredientDto;
 import com.corekitchen.ingredients.dto.IngredientPageResponse;
 import com.corekitchen.ingredients.dto.UpdateIngredientRequest;
 import com.corekitchen.ingredients.service.IngredientService;
+import com.corekitchen.integrations.usda.dto.UsdaFood;
+import com.corekitchen.integrations.usda.dto.UsdaIngredientDto;
+import com.corekitchen.integrations.usda.service.UsdaIngredientService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -14,6 +17,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -24,6 +28,7 @@ import java.util.UUID;
 public class IngredientController {
 
     private final IngredientService ingredientService;
+    private final UsdaIngredientService usdaIngredientService;
 
     @GetMapping
     public IngredientPageResponse list(
@@ -71,5 +76,23 @@ public class IngredientController {
             @AuthenticationPrincipal AuthenticatedUser principal
     ) {
         ingredientService.delete(id, principal.organizationId());
+    }
+
+    @GetMapping("/usda/search")
+    public List<UsdaIngredientDto> searchUsda(
+            @RequestParam String query,
+            @RequestParam(defaultValue = "0") int pageNumber,
+            @RequestParam(defaultValue = "20") int pageSize,
+            @AuthenticationPrincipal AuthenticatedUser principal
+    ) {
+        return usdaIngredientService.searchIngredients(query, pageNumber, pageSize);
+    }
+
+    @GetMapping("/usda/{fdcId}")
+    public UsdaFood getUsdaFood(
+            @PathVariable String fdcId,
+            @AuthenticationPrincipal AuthenticatedUser principal
+    ) {
+        return usdaIngredientService.getFoodDetails(fdcId);
     }
 }

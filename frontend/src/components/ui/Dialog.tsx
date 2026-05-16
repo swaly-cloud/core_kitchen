@@ -40,7 +40,9 @@ export function Dialog({ open, onClose, children }: DialogProps) {
 
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : '';
-    return () => { document.body.style.overflow = ''; };
+    return () => {
+      document.body.style.overflow = '';
+    };
   }, [open]);
 
   if (!open) return null;
@@ -52,13 +54,11 @@ export function Dialog({ open, onClose, children }: DialogProps) {
       aria-modal="true"
     >
       <div
-        className="fixed inset-0 bg-black/50"
+        className="fixed inset-0 bg-forest-900/50 backdrop-blur-sm"
         onClick={onClose}
         aria-hidden="true"
       />
-      <div className="relative z-10 w-full">
-        {children}
-      </div>
+      <div className="relative z-10 w-full">{children}</div>
     </div>,
     document.body
   );
@@ -68,7 +68,7 @@ export function DialogContent({ children, className }: DialogContentProps) {
   return (
     <div
       className={cn(
-        'mx-auto w-full max-w-lg rounded-xl bg-white shadow-xl',
+        'mx-auto w-full max-w-lg rounded-2xl bg-white shadow-elevated border border-stone-200',
         className
       )}
     >
@@ -79,19 +79,19 @@ export function DialogContent({ children, className }: DialogContentProps) {
 
 export function DialogHeader({ children }: DialogHeaderProps) {
   return (
-    <div className="flex items-center justify-between border-b border-zinc-100 px-6 py-4">
+    <div className="flex items-center justify-between border-b border-stone-100 px-6 py-4">
       {children}
     </div>
   );
 }
 
 export function DialogTitle({ children }: DialogTitleProps) {
-  return <h2 className="text-lg font-semibold text-zinc-900">{children}</h2>;
+  return <h2 className="text-lg font-semibold text-stone-900">{children}</h2>;
 }
 
 export function DialogFooter({ children }: DialogFooterProps) {
   return (
-    <div className="flex items-center justify-end gap-3 border-t border-zinc-100 px-6 py-4">
+    <div className="flex items-center justify-end gap-3 border-t border-stone-100 px-6 py-4 bg-stone-50/60 rounded-b-2xl">
       {children}
     </div>
   );
@@ -101,8 +101,8 @@ export function DialogCloseButton({ onClose }: { onClose: () => void }) {
   return (
     <button
       onClick={onClose}
-      className="rounded-md p-1 text-zinc-400 hover:bg-zinc-100 hover:text-zinc-600 transition-colors"
-      aria-label="Fermer"
+      className="rounded-md p-1 text-stone-400 hover:bg-stone-100 hover:text-stone-700 transition-colors"
+      aria-label="Close"
     >
       <X className="h-5 w-5" />
     </button>

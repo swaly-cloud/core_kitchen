@@ -1,26 +1,17 @@
 'use client';
 
 import { useRecipeCost } from '@/hooks/useRecipes';
-import { Card } from '@/components/ui/Card';
+import { cn } from '@/lib/utils';
 
 interface Props {
   recipeId: string;
 }
 
 function fmt(n: number) {
-  return n.toLocaleString('fr-TN', { minimumFractionDigits: 3, maximumFractionDigits: 3 });
-}
-
-function FoodCostBadge({ pct }: { pct: number }) {
-  const color =
-    pct < 30 ? 'text-green-700 bg-green-100' :
-    pct <= 40 ? 'text-orange-700 bg-orange-100' :
-                'text-red-700 bg-red-100';
-  return (
-    <span className={`inline-block px-2 py-0.5 rounded text-sm font-semibold ${color}`}>
-      {pct.toFixed(2)} %
-    </span>
-  );
+  return n.toLocaleString('fr-TN', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
 }
 
 export default function RecipeCostCard({ recipeId }: Props) {
@@ -28,73 +19,95 @@ export default function RecipeCostCard({ recipeId }: Props) {
 
   if (isLoading) {
     return (
-      <Card className="p-6 animate-pulse">
-        <div className="h-4 bg-gray-200 rounded w-1/3 mb-3" />
-        <div className="h-3 bg-gray-100 rounded w-1/2" />
-      </Card>
+      <div className="rounded-2xl border border-stone-200 bg-white p-5 shadow-card animate-pulse">
+        <div className="h-3 bg-stone-200 rounded w-1/3 mb-3" />
+        <div className="h-8 bg-stone-200 rounded w-1/2 mb-4" />
+        <div className="h-2 bg-stone-100 rounded w-full" />
+      </div>
     );
   }
 
   if (isError || !data) {
     return (
-      <Card className="p-6 text-sm text-gray-500">
-        Impossible de calculer le coût (ingrédients manquants ou unités incompatibles).
-      </Card>
+      <div className="rounded-2xl border border-stone-200 bg-white p-5 shadow-card text-sm text-stone-500">
+        Cost cannot be calculated (missing ingredients or incompatible units).
+      </div>
     );
   }
 
+  const fc = data.foodCostPercentage;
+  const fcColor =
+    fc == null
+      ? ''
+      : fc < 30
+      ? 'bg-brand-500'
+      : fc <= 40
+      ? 'bg-warning'
+      : 'bg-danger';
+
   return (
-    <Card className="p-6 space-y-4">
-      <h2 className="text-lg font-semibold text-gray-900">Analyse des coûts</h2>
-
-      <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
-        <div>
-          <p className="text-xs text-gray-500 uppercase tracking-wide">Coût total</p>
-          <p className="text-xl font-bold text-gray-900">{fmt(data.totalCost)} TND</p>
-        </div>
-
-        {data.costPerPortion != null && (
-          <div>
-            <p className="text-xs text-gray-500 uppercase tracking-wide">Coût / portion</p>
-            <p className="text-xl font-bold text-gray-900">{fmt(data.costPerPortion)} TND</p>
-          </div>
-        )}
-
-        {data.foodCostPercentage != null && (
-          <div>
-            <p className="text-xs text-gray-500 uppercase tracking-wide mb-1">Food cost %</p>
-            <FoodCostBadge pct={data.foodCostPercentage} />
-          </div>
-        )}
+    <div className="rounded-2xl border border-stone-200 bg-white p-5 shadow-card">
+      <div className="text-2xs font-semibold uppercase tracking-eyebrow text-brand-700">
+        Live cost
       </div>
 
-      {data.lines.length > 0 && (
-        <div>
-          <h3 className="text-sm font-medium text-gray-700 mb-2">Détail par ingrédient</h3>
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm text-left">
-              <thead>
-                <tr className="text-xs text-gray-500 uppercase border-b border-gray-200">
-                  <th className="pb-2 pr-4 font-medium">Ingrédient</th>
-                  <th className="pb-2 pr-4 font-medium text-right">Quantité</th>
-                  <th className="pb-2 pr-4 font-medium">Unité</th>
-                  <th className="pb-2 font-medium text-right">Coût (TND)</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-gray-100">
-                {data.lines.map((line, i) => (
-                  <tr key={i}>
-                    <td className="py-1.5 pr-4 text-gray-800">{line.name}</td>
-                    <td className="py-1.5 pr-4 text-right text-gray-600">{line.quantity}</td>
-                    <td className="py-1.5 pr-4 text-gray-500">{line.unit}</td>
-                    <td className="py-1.5 text-right font-medium text-gray-900">{fmt(line.lineCost)}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+      <div className="mt-2 flex items-baseline gap-1">
+        <span className="text-3xl font-bold text-stone-900 tabular-nums">
+          {data.costPerPortion != null ? fmt(data.costPerPortion) : fmt(data.totalCost)}
+        </span>
+        <span className="text-sm text-stone-500">TND</span>
+        <span className="text-xs text-stone-500 ml-1">
+          {data.costPerPortion != null ? 'per serving' : 'total'}
+        </span>
+      </div>
+
+      <div className="mt-1 text-xs text-stone-500">
+        <span className="font-mono">{fmt(data.totalCost)} TND</span> total
+      </div>
+
+      {fc != null && (
+        <div className="mt-4">
+          <div className="flex items-center justify-between text-xs">
+            <span className="text-stone-600">Food-cost</span>
+            <span className="font-medium text-stone-900 tabular-nums">
+              {fc.toFixed(1)}%
+            </span>
           </div>
+          <div className="mt-1.5 h-1.5 rounded-full bg-stone-100 overflow-hidden">
+            <div
+              className={cn('h-full rounded-full', fcColor)}
+              style={{ width: `${Math.min(fc, 100)}%` }}
+            />
+          </div>
+          <div className="mt-1 text-2xs text-stone-400">target ≤ 30%</div>
         </div>
       )}
-    </Card>
+
+      {data.lines.length > 0 && (
+        <div className="mt-5 pt-4 border-t border-stone-100">
+          <div className="text-2xs font-semibold uppercase tracking-eyebrow text-stone-500 mb-2">
+            Per-ingredient
+          </div>
+          <ul className="space-y-1.5">
+            {data.lines.slice(0, 6).map((line, i) => (
+              <li
+                key={i}
+                className="flex items-center justify-between text-sm gap-2"
+              >
+                <span className="text-stone-700 truncate">{line.name}</span>
+                <span className="font-mono text-stone-900 tabular-nums shrink-0">
+                  {fmt(line.lineCost)}
+                </span>
+              </li>
+            ))}
+            {data.lines.length > 6 && (
+              <li className="text-2xs text-stone-400 uppercase tracking-eyebrow pt-1">
+                +{data.lines.length - 6} more
+              </li>
+            )}
+          </ul>
+        </div>
+      )}
+    </div>
   );
 }

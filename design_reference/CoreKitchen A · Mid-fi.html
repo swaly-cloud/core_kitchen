@@ -1,0 +1,1427 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>CoreKitchen · Direction A · Mid-fi</title>
+<link rel="stylesheet" href="midfi.css" />
+</head>
+<body>
+
+<!-- ================================================================ -->
+<!-- PAGE HEADER                                                       -->
+<!-- ================================================================ -->
+<header class="page-head">
+  <div class="page-head-row">
+    <div>
+      <div class="meta">Direction A · Classic Console</div>
+      <h1>CoreKitchen <em>mid-fi</em></h1>
+    </div>
+    <div class="ribbon">
+      <span class="pill">v0.2 · mid-fi</span>
+      <span class="pill">16 may 2026</span>
+      <span class="pill">desktop · 1440</span>
+    </div>
+  </div>
+
+  <!-- design system mini-strip -->
+  <section class="sys">
+    <div>
+      <h3>Palette</h3>
+      <div class="swatches">
+        <div style="background:#fafaf5;color:#1e2219"><span class="label">paper</span><span class="hex">#fafaf5</span></div>
+        <div style="background:#3a4a38;color:#fff"><span class="label">ink · side</span><span class="hex">#3a4a38</span></div>
+        <div style="background:#7aad6b;color:#fff"><span class="label">accent</span><span class="hex">#7aad6b</span></div>
+        <div style="background:#d8edcf;color:#4f7f44"><span class="label">accent / soft</span><span class="hex">#d8edcf</span></div>
+        <div style="background:#2e6e42;color:#fff"><span class="label">ok</span><span class="hex">#2e6e42</span></div>
+        <div style="background:#b8412e;color:#fff"><span class="label">bad</span><span class="hex">#b8412e</span></div>
+      </div>
+    </div>
+    <div>
+      <h3>Typography</h3>
+      <div class="type-sample">
+        <div class="display">CoreKitchen <em>recipe</em></div>
+        <div class="ui">Nunito · display · rounded geometric · 800</div>
+        <div class="ui" style="color:var(--ink-2)">Geist · 14 px · UI &amp; body text. Clean, legible, with strong numerics.</div>
+        <div class="mono">JetBrains Mono · €19.20 · 28% · 16 may 2026</div>
+      </div>
+    </div>
+    <div>
+      <h3>Atoms</h3>
+      <div class="components">
+        <button class="btn accent">＋ New recipe</button>
+        <button class="btn">Export</button>
+        <button class="btn ghost">Cancel</button>
+        <span class="pill ok"><span class="d"></span>Live</span>
+        <span class="pill draft">Draft</span>
+        <span class="pill warn"><span class="d"></span>Review</span>
+        <span class="chip on">All <span class="ct">342</span></span>
+        <span class="chip">Pastry <span class="ct">98</span></span>
+      </div>
+      <div class="components" style="margin-top:10px">
+        <span class="allergen">milk</span>
+        <span class="allergen">gluten</span>
+        <span class="allergen">egg</span>
+        <span class="kbd">⌘</span><span class="kbd">K</span>
+      </div>
+    </div>
+  </section>
+</header>
+
+<!-- ================================================================ -->
+<!-- INTRO                                                             -->
+<!-- ================================================================ -->
+<div class="section-head">
+  <div class="kicker">Six screens · one flow</div>
+  <h2>From sign-in to <em>service</em>.</h2>
+  <div class="lede">
+    The Classic Console direction pushed to mid-fidelity. Warm off-white paper,
+    espresso sidebar, espelette-orange accent. Display type is Nunito
+    (rounded geometric, 800 weight); UI is Geist; financials in JetBrains Mono. Real
+    hover, focus, selection &amp; loading states throughout.
+  </div>
+</div>
+
+<div class="stage">
+
+<!-- ================================================================ -->
+<!-- 01 · LOGIN                                                        -->
+<!-- ================================================================ -->
+<section class="screen" id="s1">
+  <div class="screen-label">
+    <span class="num">01</span>
+    <h3>Sign in</h3>
+    <span class="path">corekitchen.app/login · public</span>
+  </div>
+  <p class="screen-note">
+    <b>Editorial split.</b> Left panel carries the brand &amp; a rotating chef quote
+    on a textured paper field — no marketing fluff. Right side is the fastest
+    possible sign-in: 2 fields, primary CTA, SSO secondary.
+  </p>
+
+  <div class="frame">
+    <div class="frame-chrome"><div class="dots"><i></i><i></i><i></i></div><div class="url">corekitchen.app/login</div><div class="url-spacer"></div></div>
+
+    <div style="display:grid;grid-template-columns:1.1fr 1fr;min-height:620px">
+      <!-- LEFT: brand panel -->
+      <div style="background:linear-gradient(160deg,#1a1916 0%,#2a2620 100%);color:#f4f1e9;padding:48px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden">
+        <!-- subtle texture -->
+        <div style="position:absolute;inset:0;background-image:radial-gradient(circle at 75% 25%,rgba(122,173,107,.18),transparent 60%),radial-gradient(circle at 20% 80%,rgba(122,173,107,.08),transparent 50%);pointer-events:none"></div>
+        <div style="position:relative;z-index:1">
+          <div class="row" style="gap:12px">
+            <div style="width:36px;height:36px;border-radius:9px;background:#7aad6b;color:#fff;display:grid;place-items:center;font-family:var(--serif);font-size:13px;font-weight:900;letter-spacing:-.02em">ck</div>
+            <div style="font-family:var(--serif);font-size:24px;font-weight:900;color:#fff;letter-spacing:-.02em">CoreKitchen</div>
+          </div>
+        </div>
+
+        <div style="position:relative;z-index:1;max-width:440px">
+          <div class="eyebrow" style="color:#7aad6b">— pastry lab marais</div>
+          <blockquote style="font-family:var(--serif);font-size:40px;line-height:1.1;margin:14px 0 0;color:#fff;font-weight:800;letter-spacing:-.02em">
+            "We killed the <em style="font-style:normal;color:#c8e3be">spreadsheet</em>. <br/>Costs are honest now."
+          </blockquote>
+          <div class="row" style="gap:14px;margin-top:24px;color:#a8b0a0;font-family:var(--mono);font-size:11px;letter-spacing:.06em">
+            <div class="row" style="gap:8px"><span class="av sm" style="background:#4a5e48;color:#c8e3be">CD</span><span>Camille Dubois · head pastry</span></div>
+          </div>
+        </div>
+
+        <div style="position:relative;z-index:1;display:flex;gap:24px;color:#7a756a;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:500">
+          <span>1,200+ kitchens</span>
+          <span style="color:#3a3833">·</span>
+          <span>restaurants · bakeries · catering</span>
+        </div>
+      </div>
+
+      <!-- RIGHT: form -->
+      <div style="padding:80px 56px;display:flex;flex-direction:column;justify-content:center;gap:18px;max-width:520px">
+        <div>
+          <div class="eyebrow">welcome back</div>
+          <h2 class="h-display" style="font-size:42px;font-weight:900;margin-top:6px">Sign in to your <em>kitchen</em></h2>
+        </div>
+
+        <div class="col" style="gap:14px;margin-top:6px">
+          <div class="field">
+            <span class="label">work email</span>
+            <div class="input"><span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="8deeece0e4e1e1e8cde0ece4fee2e3a0ffe8e3ecffe9a3ebff">[email&#160;protected]</a></span></div>
+          </div>
+          <div class="field">
+            <span class="label">password</span>
+            <div class="input focused">
+              <span style="letter-spacing:.25em">••••••••</span>
+              <span class="caret"></span>
+              <span style="margin-left:auto" class="mono tiny muted">show</span>
+            </div>
+            <div class="helper">Focus state — accent ring, soft halo.</div>
+          </div>
+          <div class="row between" style="margin-top:2px">
+            <label class="row" style="gap:8px;cursor:pointer">
+              <span class="check on acc"></span>
+              <span style="font-size:13px;color:var(--ink-2)">Remember this kitchen</span>
+            </label>
+            <a href="#" style="font-family:var(--mono);font-size:11px;color:var(--ink-2);text-decoration:underline;text-decoration-color:var(--line-3)">Forgot password</a>
+          </div>
+
+          <button class="btn accent lg" style="width:100%;margin-top:6px;justify-content:center">Sign in</button>
+
+          <div class="row center" style="gap:12px;margin:2px 0">
+            <span style="flex:1;height:1px;background:var(--line)"></span>
+            <span class="mono tiny muted">or</span>
+            <span style="flex:1;height:1px;background:var(--line)"></span>
+          </div>
+
+          <button class="btn lg" style="width:100%;justify-content:center">Continue with SSO</button>
+
+          <div style="text-align:center;font-size:13px;color:var(--muted);margin-top:14px">
+            New here? <a href="#" style="color:var(--ink);text-decoration:underline;text-decoration-color:var(--acc);text-underline-offset:3px">Start a free trial</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================ -->
+<!-- 02 · DASHBOARD                                                    -->
+<!-- ================================================================ -->
+<section class="screen" id="s2">
+  <div class="screen-label">
+    <span class="num">02</span>
+    <h3>Dashboard · home</h3>
+    <span class="path">/app · authenticated</span>
+  </div>
+  <p class="screen-note">
+    <b>What's happening &amp; what needs you.</b> Page header → KPI strip with
+    sparklines → cost-trend chart + activity feed → recent recipes table with
+    quick statuses. Sidebar dimmed items signal the roadmap inside the product.
+  </p>
+
+  <div class="frame">
+    <div class="frame-chrome"><div class="dots"><i></i><i></i><i></i></div><div class="url">corekitchen.app/dashboard</div><div class="url-spacer"></div></div>
+
+    <div class="app">
+      <!-- SIDEBAR -->
+      <aside class="sidenav">
+        <div class="brand"><div class="mark">c</div><div class="name">CoreKitchen</div></div>
+        <div class="ws"><span class="av">MR</span> Maison Renard <span class="caret">▾</span></div>
+
+        <div class="grp">Workspace</div>
+        <a href="#" class="on"><span class="ico">◉</span>Dashboard</a>
+        <a href="#"><span class="ico">▢</span>Recipes <span class="badge">342</span></a>
+        <a href="#"><span class="ico">▢</span>Ingredients <span class="badge">1.2k</span></a>
+        <a href="#"><span class="ico">▢</span>Suppliers</a>
+        <a href="#"><span class="ico">▢</span>Allergens</a>
+        <a href="#"><span class="ico">▢</span>Menus</a>
+
+        <div class="grp">Planning</div>
+        <a href="#" class="dim"><span class="ico">▢</span>Production</a>
+        <a href="#" class="dim"><span class="ico">▢</span>Stock</a>
+        <a href="#" class="dim"><span class="ico">▢</span>Analytics</a>
+
+        <div class="grp">Team</div>
+        <a href="#"><span class="ico">▢</span>Members</a>
+        <a href="#"><span class="ico">▢</span>Settings</a>
+
+        <div class="foot">
+          <div class="av cr" style="width:30px;height:30px;border-radius:50%">CR</div>
+          <div style="min-width:0">
+            <div class="who">Camille Renard</div>
+            <div class="role">Head chef</div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- MAIN -->
+      <div class="main">
+        <div class="topbar">
+          <div class="crumb">Workspace · <b>Dashboard</b></div>
+          <div class="input search empty" style="max-width:420px;margin-left:24px;flex:1">
+            <span>Search recipes, ingredients, suppliers…</span>
+            <span class="kbd-row"><span class="kbd">⌘</span><span class="kbd">K</span></span>
+          </div>
+          <div class="top-right">
+            <button class="btn sm ghost" title="Notifications">🔔 <span class="pill ok" style="font-size:9px;padding:1px 6px">3</span></button>
+            <button class="btn sm">＋ New</button>
+            <div class="av cr">CR</div>
+          </div>
+        </div>
+
+        <div class="content">
+          <!-- page header -->
+          <div class="page-h">
+            <div>
+              <div class="eyebrow">friday · 16 may 2026</div>
+              <h2 class="h-display" style="font-size:38px;font-weight:900;margin-top:4px">Good morning, <em>Camille</em>.</h2>
+              <div class="sub" style="margin-top:6px">6 chefs on the floor · 14 recipes in production today</div>
+            </div>
+            <div class="btn-row">
+              <button class="btn"><span class="ico">▾</span>Last 30 days</button>
+              <button class="btn"><span class="ico">⤴</span>Export</button>
+              <button class="btn accent">＋ New recipe</button>
+            </div>
+          </div>
+
+          <!-- KPI strip -->
+          <div class="grid g4">
+            <div class="card kpi">
+              <span class="label">total recipes</span>
+              <div class="v">342</div>
+              <div class="d"><span>↑ 12</span><span class="muted">this week</span></div>
+              <svg class="spark" viewBox="0 0 120 36" preserveAspectRatio="none" aria-hidden="true">
+                <path class="area" d="M0,30 L10,28 L20,24 L30,26 L40,22 L50,18 L60,20 L70,14 L80,16 L90,10 L100,12 L110,8 L120,6 L120,36 L0,36 Z"/>
+                <path class="line" d="M0,30 L10,28 L20,24 L30,26 L40,22 L50,18 L60,20 L70,14 L80,16 L90,10 L100,12 L110,8 L120,6"/>
+              </svg>
+            </div>
+            <div class="card kpi">
+              <span class="label">avg cost / serving</span>
+              <div class="v">€4.<em>12</em></div>
+              <div class="d bad"><span>↑ €0.18</span><span class="muted">vs last month</span></div>
+              <svg class="spark" viewBox="0 0 120 36" preserveAspectRatio="none" aria-hidden="true">
+                <path class="line" d="M0,22 L15,24 L30,20 L45,22 L60,18 L75,20 L90,14 L105,16 L120,10"/>
+              </svg>
+            </div>
+            <div class="card kpi">
+              <span class="label">ingredients tracked</span>
+              <div class="v">1,184</div>
+              <div class="d"><span>↑ 34</span><span class="muted">new this month</span></div>
+              <svg class="spark" viewBox="0 0 120 36" preserveAspectRatio="none" aria-hidden="true">
+                <path class="line" d="M0,28 L15,26 L30,26 L45,22 L60,20 L75,18 L90,16 L105,12 L120,10"/>
+              </svg>
+            </div>
+            <div class="card kpi tint">
+              <span class="label">food-cost ratio</span>
+              <div class="v" style="color:var(--acc-deep)">28.6<em>%</em></div>
+              <div class="d flat"><span class="mono">target ≤ 30%</span></div>
+              <div class="pbar acc" style="height:8px"><i style="width:75%"></i></div>
+            </div>
+          </div>
+
+          <!-- chart + activity -->
+          <div class="grid" style="grid-template-columns:2fr 1fr">
+            <div class="card padded-0">
+              <div class="card-h">
+                <h4>Cost per serving · trend</h4>
+                <div class="row" style="gap:10px">
+                  <div class="btn-group">
+                    <button class="btn sm on">All</button>
+                    <button class="btn sm">Pastry</button>
+                    <button class="btn sm">Savory</button>
+                    <button class="btn sm">Bakery</button>
+                  </div>
+                  <span class="meta">12 weeks</span>
+                </div>
+              </div>
+              <div class="card-body" style="padding-top:14px">
+                <svg viewBox="0 0 600 200" preserveAspectRatio="none" style="width:100%;height:200px;display:block" aria-hidden="true">
+                  <!-- grid -->
+                  <g stroke="#e6e0cf" stroke-width="1">
+                    <line x1="0" y1="40" x2="600" y2="40"/>
+                    <line x1="0" y1="90" x2="600" y2="90"/>
+                    <line x1="0" y1="140" x2="600" y2="140"/>
+                    <line x1="0" y1="190" x2="600" y2="190"/>
+                  </g>
+                  <!-- target line -->
+                  <line x1="0" y1="70" x2="600" y2="70" stroke="#d4cdb8" stroke-dasharray="4 4"/>
+                  <text x="6" y="64" font-family="JetBrains Mono" font-size="9" fill="#8a857a" letter-spacing="1">TARGET €4.00</text>
+
+                  <!-- area -->
+                  <path d="M0,150 L50,140 L100,130 L150,125 L200,115 L250,110 L300,105 L350,95 L400,100 L450,90 L500,85 L550,75 L600,80 L600,200 L0,200 Z" fill="#fdf4ec"/>
+                  <!-- line all -->
+                  <path d="M0,150 L50,140 L100,130 L150,125 L200,115 L250,110 L300,105 L350,95 L400,100 L450,90 L500,85 L550,75 L600,80"
+                        fill="none" stroke="#d96f2d" stroke-width="2"/>
+                  <!-- pastry line -->
+                  <path d="M0,160 L50,158 L100,152 L150,150 L200,148 L250,140 L300,138 L350,130 L400,135 L450,128 L500,122 L550,118 L600,120"
+                        fill="none" stroke="#1c1c1a" stroke-width="1.5" stroke-dasharray="3 3"/>
+                  <!-- last point dot -->
+                  <circle cx="600" cy="80" r="4" fill="#d96f2d" stroke="#fff" stroke-width="2"/>
+                  <!-- callout -->
+                  <g transform="translate(548,40)">
+                    <rect x="0" y="0" rx="6" ry="6" width="48" height="22" fill="#1c1c1a"/>
+                    <text x="24" y="15" text-anchor="middle" font-family="JetBrains Mono" font-size="11" fill="#fff" font-weight="600">€4.12</text>
+                  </g>
+                  <!-- x labels -->
+                  <g font-family="JetBrains Mono" font-size="10" fill="#8a857a">
+                    <text x="0" y="195">Feb</text>
+                    <text x="150" y="195">Mar</text>
+                    <text x="300" y="195">Apr</text>
+                    <text x="450" y="195">May</text>
+                  </g>
+                </svg>
+                <div class="row" style="gap:18px;margin-top:6px">
+                  <div class="row" style="gap:6px;font-size:12px;color:var(--ink-2)"><span style="width:14px;height:2px;background:var(--acc);display:inline-block"></span>All recipes</div>
+                  <div class="row" style="gap:6px;font-size:12px;color:var(--ink-2)"><span style="width:14px;height:2px;background:var(--ink);display:inline-block;background-image:linear-gradient(90deg,var(--ink) 50%,transparent 50%);background-size:6px 2px"></span>Pastry only</div>
+                  <div class="row" style="gap:6px;font-size:12px;color:var(--muted)"><span style="width:14px;height:0;border-top:1px dashed var(--line-3);display:inline-block"></span>Target €4.00</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card padded-0">
+              <div class="card-h"><h4>Activity</h4><a href="#" class="meta" style="color:var(--ink-2)">view all →</a></div>
+              <div class="card-body" style="padding:6px 0">
+                <div class="col" style="gap:0">
+                  <div class="row" style="gap:10px;padding:10px 18px;border-bottom:1px solid var(--line)"><span class="av sm cr">CR</span><div class="flex1 tight" style="font-size:13px"><b>Camille</b> edited <em class="serif" style="color:var(--ink-2);font-size:14px">Tarte au citron</em><div class="mono tiny muted" style="margin-top:2px">2 min ago</div></div></div>
+                  <div class="row" style="gap:10px;padding:10px 18px;border-bottom:1px solid var(--line)"><span class="av sm jm">JM</span><div class="flex1 tight" style="font-size:13px"><b>Julien</b> published <em class="serif" style="color:var(--ink-2);font-size:14px">Brioche feuilletée</em><div class="mono tiny muted" style="margin-top:2px">1 h ago</div></div></div>
+                  <div class="row" style="gap:10px;padding:10px 18px;border-bottom:1px solid var(--line)"><span class="av sm outline">⚡</span><div class="flex1 tight" style="font-size:13px">Butter price <b style="color:var(--bad)">+12%</b> at Beillevaire<div class="mono tiny muted" style="margin-top:2px">affects 184 recipes · 3 h ago</div></div></div>
+                  <div class="row" style="gap:10px;padding:10px 18px;border-bottom:1px solid var(--line)"><span class="av sm pl">PL</span><div class="flex1 tight" style="font-size:13px"><b>Pauline</b> added <b>14</b> ingredients<div class="mono tiny muted" style="margin-top:2px">yesterday</div></div></div>
+                  <div class="row" style="gap:10px;padding:10px 18px"><span class="av sm cr">CR</span><div class="flex1 tight" style="font-size:13px"><b>Camille</b> archived <em class="serif" style="color:var(--ink-2);font-size:14px">Beurre blanc v2</em><div class="mono tiny muted" style="margin-top:2px">2 days ago</div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- recent recipes -->
+          <div class="card padded-0">
+            <div class="card-h">
+              <h4>Recent recipes</h4>
+              <div class="row" style="gap:10px">
+                <span class="meta">12 of 342</span>
+                <a href="#" class="meta" style="color:var(--ink-2)">view all →</a>
+              </div>
+            </div>
+            <table class="tbl">
+              <thead><tr>
+                <th></th><th>Name</th><th>Category</th><th>Cost / srv</th><th>Food-cost</th><th>Updated</th><th>By</th><th>Status</th><th></th>
+              </tr></thead>
+              <tbody>
+                <tr>
+                  <td><div class="thumb t1">T</div></td>
+                  <td class="pri">Tarte au citron meringuée</td>
+                  <td>Pastry</td>
+                  <td class="num">€2.40</td>
+                  <td><div class="row" style="gap:8px"><span class="num">28%</span><div class="pbar ok" style="width:60px"><i style="width:80%"></i></div></div></td>
+                  <td class="mono tiny muted">2 h ago</td>
+                  <td><span class="av sm cr">CR</span></td>
+                  <td><span class="pill ok"><span class="d"></span>Live</span></td>
+                  <td class="row-actions">⋯</td>
+                </tr>
+                <tr>
+                  <td><div class="thumb t2">B</div></td>
+                  <td class="pri">Brioche feuilletée</td>
+                  <td>Bakery</td>
+                  <td class="num">€0.90</td>
+                  <td><div class="row" style="gap:8px"><span class="num">22%</span><div class="pbar ok" style="width:60px"><i style="width:55%;background:var(--ok)"></i></div></div></td>
+                  <td class="mono tiny muted">yesterday</td>
+                  <td><span class="av sm jm">JM</span></td>
+                  <td><span class="pill draft">Draft</span></td>
+                  <td class="row-actions">⋯</td>
+                </tr>
+                <tr>
+                  <td><div class="thumb t3">B</div></td>
+                  <td class="pri">Bœuf Wellington</td>
+                  <td>Savory</td>
+                  <td class="num">€14.20</td>
+                  <td><div class="row" style="gap:8px"><span class="num">35%</span><div class="pbar warn" style="width:60px"><i style="width:100%;background:var(--bad)"></i></div></div></td>
+                  <td class="mono tiny muted">3 days ago</td>
+                  <td><span class="av sm cr">CR</span></td>
+                  <td><span class="pill ok"><span class="d"></span>Live</span></td>
+                  <td class="row-actions">⋯</td>
+                </tr>
+                <tr>
+                  <td><div class="thumb t4">C</div></td>
+                  <td class="pri">Croquembouche XL</td>
+                  <td>Pastry</td>
+                  <td class="num">€7.40</td>
+                  <td><div class="row" style="gap:8px"><span class="num">30%</span><div class="pbar warn" style="width:60px"><i style="width:90%;background:var(--warn)"></i></div></div></td>
+                  <td class="mono tiny muted">4 days ago</td>
+                  <td><span class="av sm cr">CR</span></td>
+                  <td><span class="pill warn"><span class="d"></span>Review</span></td>
+                  <td class="row-actions">⋯</td>
+                </tr>
+                <tr>
+                  <td><div class="thumb t6">F</div></td>
+                  <td class="pri">Filet de bar, beurre blanc</td>
+                  <td>Savory</td>
+                  <td class="num">€6.10</td>
+                  <td><div class="row" style="gap:8px"><span class="num">26%</span><div class="pbar" style="width:60px"><i style="width:72%;background:var(--ok)"></i></div></div></td>
+                  <td class="mono tiny muted">5 days ago</td>
+                  <td><span class="av sm cr">CR</span></td>
+                  <td><span class="pill ok"><span class="d"></span>Live</span></td>
+                  <td class="row-actions">⋯</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================ -->
+<!-- 03 · RECIPES LIST                                                 -->
+<!-- ================================================================ -->
+<section class="screen" id="s3">
+  <div class="screen-label">
+    <span class="num">03</span>
+    <h3>Recipes · list</h3>
+    <span class="path">/app/recipes · filter · bulk actions</span>
+  </div>
+  <p class="screen-note">
+    <b>The working surface.</b> Category chips at top, dense table below.
+    Selection drops a dark action bar at the bottom; hover surfaces a row menu.
+    Toggle to a card grid via the segmented control on the right.
+  </p>
+
+  <div class="frame">
+    <div class="frame-chrome"><div class="dots"><i></i><i></i><i></i></div><div class="url">corekitchen.app/recipes</div><div class="url-spacer"></div></div>
+
+    <div class="app">
+      <aside class="sidenav">
+        <div class="brand"><div class="mark">c</div><div class="name">CoreKitchen</div></div>
+        <div class="ws"><span class="av">MR</span> Maison Renard <span class="caret">▾</span></div>
+
+        <div class="grp">Workspace</div>
+        <a href="#"><span class="ico">◯</span>Dashboard</a>
+        <a href="#" class="on"><span class="ico">◉</span>Recipes <span class="badge">342</span></a>
+        <a href="#"><span class="ico">▢</span>Ingredients <span class="badge">1.2k</span></a>
+        <a href="#"><span class="ico">▢</span>Suppliers</a>
+        <a href="#"><span class="ico">▢</span>Allergens</a>
+        <a href="#"><span class="ico">▢</span>Menus</a>
+
+        <div class="grp">Planning</div>
+        <a href="#" class="dim"><span class="ico">▢</span>Production</a>
+        <a href="#" class="dim"><span class="ico">▢</span>Stock</a>
+        <a href="#" class="dim"><span class="ico">▢</span>Analytics</a>
+
+        <div class="grp">Team</div>
+        <a href="#"><span class="ico">▢</span>Members</a>
+        <a href="#"><span class="ico">▢</span>Settings</a>
+
+        <div class="foot">
+          <div class="av cr" style="width:30px;height:30px;border-radius:50%">CR</div>
+          <div><div class="who">Camille Renard</div><div class="role">Head chef</div></div>
+        </div>
+      </aside>
+
+      <div class="main">
+        <div class="topbar">
+          <div class="crumb">Workspace · <b>Recipes</b></div>
+          <div class="input search empty" style="max-width:380px;margin-left:24px;flex:1">
+            <span>Search recipes…</span><span class="kbd-row"><span class="kbd">⌘</span><span class="kbd">K</span></span>
+          </div>
+          <div class="top-right">
+            <button class="btn sm ghost">🔔</button>
+            <button class="btn sm">＋ New</button>
+            <div class="av cr">CR</div>
+          </div>
+        </div>
+
+        <div class="content">
+          <div class="page-h">
+            <div>
+              <div class="eyebrow">342 recipes · 24 drafts · 18 in review</div>
+              <h2 class="h-display" style="font-size:36px;font-weight:900;margin-top:4px">Recipes</h2>
+            </div>
+            <div class="btn-row">
+              <div class="btn-group">
+                <button class="btn sm on">☰ Table</button>
+                <button class="btn sm">▦ Cards</button>
+              </div>
+              <button class="btn"><span class="ico">↥</span>Import</button>
+              <button class="btn"><span class="ico">⤴</span>Export</button>
+              <button class="btn accent">＋ New recipe</button>
+            </div>
+          </div>
+
+          <!-- filter strip -->
+          <div class="card" style="padding:14px 16px">
+            <div class="row wrap" style="gap:10px">
+              <div class="input search empty" style="flex:1;min-width:240px;max-width:340px">
+                <span>Filter by name, ingredient, allergen…</span>
+              </div>
+              <div class="chip-row">
+                <span class="chip on">All <span class="ct">342</span></span>
+                <span class="chip">Pastry <span class="ct">98</span></span>
+                <span class="chip">Bakery <span class="ct">64</span></span>
+                <span class="chip">Savory <span class="ct">124</span></span>
+                <span class="chip">Sauces <span class="ct">31</span></span>
+                <span class="chip">Cold dishes <span class="ct">25</span></span>
+                <span class="chip dashed">＋ more</span>
+              </div>
+              <span style="flex:1"></span>
+              <span class="chip dashed">status ▾</span>
+              <span class="chip dashed">author ▾</span>
+              <span class="chip dashed">food-cost ▾</span>
+              <span class="chip dashed">sort: updated ▾</span>
+            </div>
+          </div>
+
+          <!-- table -->
+          <div class="card padded-0" style="position:relative">
+            <table class="tbl">
+              <thead><tr>
+                <th style="width:32px"><span class="check"></span></th>
+                <th></th>
+                <th>Name ↕</th>
+                <th>Category</th>
+                <th>Srv</th>
+                <th>Cost / srv ↕</th>
+                <th>Food-cost</th>
+                <th>Status</th>
+                <th>Updated</th>
+                <th>By</th>
+                <th></th>
+              </tr></thead>
+              <tbody>
+                <tr class="is-selected">
+                  <td><span class="check on acc"></span></td>
+                  <td><div class="thumb t1">T</div></td>
+                  <td class="pri">Tarte au citron meringuée<div class="mono tiny muted" style="margin-top:2px">tarte-citron-v3</div></td>
+                  <td>Pastry</td>
+                  <td class="num">8</td>
+                  <td class="num">€2.40</td>
+                  <td><div class="row" style="gap:8px"><span class="num">28%</span><div class="pbar ok" style="width:48px"><i style="width:75%"></i></div></div></td>
+                  <td><span class="pill ok"><span class="d"></span>Live</span></td>
+                  <td class="mono tiny muted">2 h ago</td>
+                  <td><span class="av sm cr">CR</span></td>
+                  <td class="row-actions">⋯</td>
+                </tr>
+                <tr class="is-selected">
+                  <td><span class="check on acc"></span></td>
+                  <td><div class="thumb t2">B</div></td>
+                  <td class="pri">Brioche feuilletée<div class="mono tiny muted" style="margin-top:2px">brioche-feuilletee-v1</div></td>
+                  <td>Bakery</td>
+                  <td class="num">12</td>
+                  <td class="num">€0.90</td>
+                  <td><div class="row" style="gap:8px"><span class="num">22%</span><div class="pbar" style="width:48px"><i style="width:55%;background:var(--ok)"></i></div></div></td>
+                  <td><span class="pill draft">Draft</span></td>
+                  <td class="mono tiny muted">yesterday</td>
+                  <td><span class="av sm jm">JM</span></td>
+                  <td class="row-actions">⋯</td>
+                </tr>
+                <tr>
+                  <td><span class="check"></span></td>
+                  <td><div class="thumb t3">B</div></td>
+                  <td class="pri">Bœuf Wellington<div class="mono tiny muted" style="margin-top:2px">boeuf-wellington-v5</div></td>
+                  <td>Savory</td>
+                  <td class="num">8</td>
+                  <td class="num">€14.20</td>
+                  <td><div class="row" style="gap:8px"><span class="num">35%</span><div class="pbar" style="width:48px"><i style="width:100%;background:var(--bad)"></i></div></div></td>
+                  <td><span class="pill ok"><span class="d"></span>Live</span></td>
+                  <td class="mono tiny muted">3 days</td>
+                  <td><span class="av sm cr">CR</span></td>
+                  <td class="row-actions">⋯</td>
+                </tr>
+                <tr>
+                  <td><span class="check"></span></td>
+                  <td><div class="thumb t7">B</div></td>
+                  <td class="pri">Beurre blanc<div class="mono tiny muted" style="margin-top:2px">beurre-blanc-v2</div></td>
+                  <td>Sauces</td>
+                  <td class="num">10</td>
+                  <td class="num">€0.64</td>
+                  <td><div class="row" style="gap:8px"><span class="num">24%</span><div class="pbar" style="width:48px"><i style="width:60%;background:var(--ok)"></i></div></div></td>
+                  <td><span class="pill muted">Archived</span></td>
+                  <td class="mono tiny muted">2 weeks</td>
+                  <td><span class="av sm pl">PL</span></td>
+                  <td class="row-actions">⋯</td>
+                </tr>
+                <tr>
+                  <td><span class="check"></span></td>
+                  <td><div class="thumb t4">C</div></td>
+                  <td class="pri">Croquembouche XL<div class="mono tiny muted" style="margin-top:2px">croquembouche-xl-v2</div></td>
+                  <td>Pastry</td>
+                  <td class="num">20</td>
+                  <td class="num">€7.40</td>
+                  <td><div class="row" style="gap:8px"><span class="num">30%</span><div class="pbar" style="width:48px"><i style="width:90%;background:var(--warn)"></i></div></div></td>
+                  <td><span class="pill warn"><span class="d"></span>Review</span></td>
+                  <td class="mono tiny muted">4 days</td>
+                  <td><span class="av sm cr">CR</span></td>
+                  <td class="row-actions">⋯</td>
+                </tr>
+                <tr>
+                  <td><span class="check"></span></td>
+                  <td><div class="thumb t6">F</div></td>
+                  <td class="pri">Filet de bar, beurre blanc<div class="mono tiny muted" style="margin-top:2px">filet-bar-v1</div></td>
+                  <td>Savory</td>
+                  <td class="num">2</td>
+                  <td class="num">€6.10</td>
+                  <td><div class="row" style="gap:8px"><span class="num">26%</span><div class="pbar" style="width:48px"><i style="width:72%;background:var(--ok)"></i></div></div></td>
+                  <td><span class="pill ok"><span class="d"></span>Live</span></td>
+                  <td class="mono tiny muted">5 days</td>
+                  <td><span class="av sm cr">CR</span></td>
+                  <td class="row-actions">⋯</td>
+                </tr>
+                <tr>
+                  <td><span class="check"></span></td>
+                  <td><div class="thumb t5">P</div></td>
+                  <td class="pri">Pain au chocolat<div class="mono tiny muted" style="margin-top:2px">pain-chocolat-v1</div></td>
+                  <td>Bakery</td>
+                  <td class="num">12</td>
+                  <td class="num">€0.62</td>
+                  <td><div class="row" style="gap:8px"><span class="num">21%</span><div class="pbar" style="width:48px"><i style="width:50%;background:var(--ok)"></i></div></div></td>
+                  <td><span class="pill draft">Draft</span></td>
+                  <td class="mono tiny muted">5 days</td>
+                  <td><span class="av sm jm">JM</span></td>
+                  <td class="row-actions">⋯</td>
+                </tr>
+                <tr>
+                  <td><span class="check"></span></td>
+                  <td><div class="thumb t1">M</div></td>
+                  <td class="pri">Madeleine au miel<div class="mono tiny muted" style="margin-top:2px">madeleine-miel-v4</div></td>
+                  <td>Pastry</td>
+                  <td class="num">24</td>
+                  <td class="num">€0.70</td>
+                  <td><div class="row" style="gap:8px"><span class="num">22%</span><div class="pbar" style="width:48px"><i style="width:55%;background:var(--ok)"></i></div></div></td>
+                  <td><span class="pill ok"><span class="d"></span>Live</span></td>
+                  <td class="mono tiny muted">1 week</td>
+                  <td><span class="av sm cr">CR</span></td>
+                  <td class="row-actions">⋯</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <!-- bulk action bar (dark, slides up on selection) -->
+            <div style="position:sticky;bottom:0;left:0;right:0;background:var(--ink);color:#fff;padding:10px 16px;display:flex;align-items:center;gap:14px;border-top:1px solid var(--ink-0);box-shadow:0 -8px 24px -8px rgba(28,28,26,.25)">
+              <span class="mono tiny" style="color:#c8e3be">2 selected</span>
+              <span style="flex:1"></span>
+              <button class="btn sm" style="background:transparent;border-color:rgba(255,255,255,.18);color:#fff">Change category</button>
+              <button class="btn sm" style="background:transparent;border-color:rgba(255,255,255,.18);color:#fff">Publish</button>
+              <button class="btn sm" style="background:transparent;border-color:rgba(255,255,255,.18);color:#fff">Duplicate</button>
+              <button class="btn sm" style="background:transparent;border-color:rgba(255,255,255,.18);color:#fff">Export PDF</button>
+              <button class="btn sm" style="background:transparent;border-color:rgba(255,255,255,.18);color:#c8e3be">Archive</button>
+              <button class="btn sm" style="background:transparent;border-color:transparent;color:rgba(255,255,255,.5)">✕</button>
+            </div>
+          </div>
+
+          <!-- pagination -->
+          <div class="row between" style="padding:0 4px">
+            <div class="mono tiny muted">Showing 1–25 of 342 recipes</div>
+            <div class="row" style="gap:4px">
+              <button class="btn sm ghost">← Prev</button>
+              <button class="btn sm" style="background:var(--ink);color:#fff;border-color:var(--ink);min-width:30px;padding:5px 8px">1</button>
+              <button class="btn sm ghost" style="min-width:30px;padding:5px 8px">2</button>
+              <button class="btn sm ghost" style="min-width:30px;padding:5px 8px">3</button>
+              <span class="mono tiny muted" style="padding:0 6px">…</span>
+              <button class="btn sm ghost" style="min-width:30px;padding:5px 8px">14</button>
+              <button class="btn sm ghost">Next →</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================ -->
+<!-- 04 · RECIPE EDITOR                                                -->
+<!-- ================================================================ -->
+<section class="screen" id="s4">
+  <div class="screen-label">
+    <span class="num">04</span>
+    <h3>Recipe editor</h3>
+    <span class="path">/app/recipes/tarte-citron/edit · live cost rail</span>
+  </div>
+  <p class="screen-note">
+    <b>The heart of the product.</b> Sectioned form (basics → ingredients →
+    method) on the left; sticky live-calc rail on the right. Every keystroke
+    re-runs cost &amp; nutrition. Unsaved-changes indicator next to the title.
+  </p>
+
+  <div class="frame">
+    <div class="frame-chrome"><div class="dots"><i></i><i></i><i></i></div><div class="url">corekitchen.app/recipes/tarte-citron/edit</div><div class="url-spacer"></div></div>
+
+    <div class="app">
+      <aside class="sidenav" style="width:64px;flex:0 0 64px;padding:14px 8px;align-items:center">
+        <div class="mark" style="width:34px;height:34px;border-radius:9px;background:var(--acc);color:#fff;display:grid;place-items:center;font-family:var(--serif);font-weight:900;font-size:12px;letter-spacing:-.02em">ck</div>
+        <div style="display:flex;flex-direction:column;gap:6px;margin-top:14px;align-items:center;flex:1">
+          <div style="width:28px;height:28px;border-radius:6px;background:var(--side-2);display:grid;place-items:center;color:var(--side-text-2)" title="Dashboard">◯</div>
+          <div style="width:28px;height:28px;border-radius:6px;background:rgba(217,111,45,.18);display:grid;place-items:center;color:var(--acc);box-shadow:inset 2px 0 0 var(--acc)" title="Recipes">◉</div>
+          <div style="width:28px;height:28px;border-radius:6px;background:var(--side-2);display:grid;place-items:center;color:var(--side-text-2)" title="Ingredients">▢</div>
+          <div style="width:28px;height:28px;border-radius:6px;background:var(--side-2);display:grid;place-items:center;color:var(--side-text-2)" title="Suppliers">▢</div>
+          <div style="width:28px;height:28px;border-radius:6px;background:var(--side-2);display:grid;place-items:center;color:var(--side-text-2)" title="Menus">▢</div>
+        </div>
+        <div class="av cr" style="width:30px;height:30px;border-radius:50%">CR</div>
+      </aside>
+
+      <div class="main">
+        <div class="topbar">
+          <div class="crumb">Recipes · <b>Tarte au citron meringuée</b> · <span class="mono tiny" style="color:var(--muted);text-transform:none;letter-spacing:0">v3</span> · <span style="color:var(--acc);font-family:var(--mono);font-size:11px;font-weight:500"><span class="d" style="display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--acc);box-shadow:0 0 0 3px var(--acc-soft);margin-right:5px;vertical-align:1px"></span>unsaved</span></div>
+          <div class="top-right">
+            <button class="btn sm ghost">Cancel</button>
+            <button class="btn sm">⎘ Duplicate</button>
+            <button class="btn sm">Save draft</button>
+            <button class="btn accent sm">Publish →</button>
+          </div>
+        </div>
+
+        <div class="content" style="flex-direction:row;align-items:flex-start;gap:16px;padding:18px;background:var(--bg)">
+          <!-- form -->
+          <div class="col flex1" style="gap:16px;min-width:0">
+            <!-- basics -->
+            <div class="card padded-0">
+              <div class="card-h"><h4>Basics</h4><span class="meta">section 1 / 4</span></div>
+              <div class="card-body">
+                <div class="grid g2">
+                  <div class="field span2">
+                    <span class="label">recipe name *</span>
+                    <div class="input" style="font-size:16px;font-family:var(--serif);font-weight:700;color:var(--ink)">Tarte au citron meringuée</div>
+                  </div>
+                  <div class="field span2">
+                    <span class="label">description</span>
+                    <div class="input tall">Lemon tart with Italian meringue, blowtorch finish. Family recipe scaled for service.</div>
+                  </div>
+                  <div class="field"><span class="label">category</span><div class="input select"><span>Pastry</span></div></div>
+                  <div class="field"><span class="label">difficulty</span><div class="input select"><span>Intermediate</span></div></div>
+                  <div class="field"><span class="label">prep time</span><div class="input"><span class="mono">45</span><span class="muted">min</span></div></div>
+                  <div class="field"><span class="label">cook time</span><div class="input"><span class="mono">35</span><span class="muted">min</span></div></div>
+                  <div class="field span2">
+                    <span class="label">hero photo</span>
+                    <div class="media wide" style="height:120px;background:linear-gradient(135deg,#e7b25c,#c8821e);border:none;color:#fff;font-family:var(--serif);font-size:48px;font-style:italic">T</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ingredients -->
+            <div class="card padded-0">
+              <div class="card-h">
+                <h4>Ingredients <span class="meta" style="margin-left:8px;text-transform:none;letter-spacing:0">12 items · auto-cost on</span></h4>
+                <div class="btn-row">
+                  <button class="btn sm ghost">＋ Section</button>
+                  <button class="btn sm">＋ Add ingredient</button>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="sec-h">Pastry shell <span class="n">4 ingredients · €1.53</span></div>
+                <table class="tbl" style="margin-top:8px">
+                  <thead><tr><th style="width:20px"></th><th>Ingredient</th><th>Qty</th><th>Unit</th><th>Cost</th><th>%</th><th></th></tr></thead>
+                  <tbody>
+                    <tr><td class="muted mono">⋮⋮</td><td class="pri">Flour, T55</td><td class="num">250</td><td>g</td><td class="num">€0.30</td><td class="num">3%</td><td class="row-actions">✕</td></tr>
+                    <tr><td class="muted mono">⋮⋮</td><td class="pri">Butter, unsalted AOP</td><td class="num">125</td><td>g</td><td class="num">€1.05</td><td class="num">11%</td><td class="row-actions">✕</td></tr>
+                    <tr><td class="muted mono">⋮⋮</td><td class="pri">Sugar, fine</td><td class="num">80</td><td>g</td><td class="num">€0.08</td><td class="num">1%</td><td class="row-actions">✕</td></tr>
+                    <tr><td class="muted mono">⋮⋮</td><td class="pri">Egg yolk</td><td class="num">1</td><td>unit</td><td class="num">€0.10</td><td class="num">1%</td><td class="row-actions">✕</td></tr>
+                  </tbody>
+                </table>
+
+                <div class="sec-h" style="margin-top:16px">Lemon curd <span class="n">4 ingredients · €2.62</span></div>
+                <table class="tbl" style="margin-top:8px">
+                  <thead><tr><th style="width:20px"></th><th>Ingredient</th><th>Qty</th><th>Unit</th><th>Cost</th><th>%</th><th></th></tr></thead>
+                  <tbody>
+                    <tr><td class="muted mono">⋮⋮</td><td class="pri">Lemon juice, fresh</td><td class="num">150</td><td>ml</td><td class="num">€0.90</td><td class="num">9%</td><td class="row-actions">✕</td></tr>
+                    <tr><td class="muted mono">⋮⋮</td><td class="pri">Butter, unsalted AOP</td><td class="num">90</td><td>g</td><td class="num">€0.76</td><td class="num">8%</td><td class="row-actions">✕</td></tr>
+                    <tr><td class="muted mono">⋮⋮</td><td class="pri">Egg, whole</td><td class="num">3</td><td>unit</td><td class="num">€0.96</td><td class="num">10%</td><td class="row-actions">✕</td></tr>
+                  </tbody>
+                </table>
+
+                <div class="input search focused" style="margin-top:14px">
+                  <span>valrhona 70</span><span class="caret"></span>
+                  <span class="kbd-row" style="margin-left:auto"><span class="kbd">↵</span> add</span>
+                </div>
+                <!-- autocomplete results -->
+                <div style="margin-top:6px;border:1px solid var(--line);border-radius:var(--r-sm);background:var(--card);box-shadow:var(--sh-2);overflow:hidden">
+                  <div class="row" style="gap:12px;padding:10px 14px;background:var(--acc-tint);border-bottom:1px solid var(--line)"><div class="thumb t3" style="width:28px;height:28px;font-size:14px">V</div><div class="flex1"><div style="font-size:13px;font-weight:600">Valrhona Guanaja 70%</div><div class="mono tiny muted">cocoa · €72.00 / kg · 12 recipes</div></div><span class="kbd">↵</span></div>
+                  <div class="row" style="gap:12px;padding:10px 14px;border-bottom:1px solid var(--line)"><div class="thumb t3" style="width:28px;height:28px;font-size:14px">V</div><div class="flex1"><div style="font-size:13px;font-weight:600">Valrhona Caraïbe 66%</div><div class="mono tiny muted">cocoa · €58.00 / kg · 8 recipes</div></div></div>
+                  <div class="row" style="gap:12px;padding:10px 14px"><div class="thumb t8" style="width:28px;height:28px;font-size:14px;background:linear-gradient(135deg,var(--paper-2),var(--line));color:var(--ink);font-style:normal">＋</div><div class="flex1"><div style="font-size:13px;font-weight:500;color:var(--ink-2)">Create new · <em class="serif">"valrhona 70"</em></div><div class="mono tiny muted">add to ingredients catalogue</div></div></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- method -->
+            <div class="card padded-0">
+              <div class="card-h">
+                <h4>Method <span class="meta" style="margin-left:8px;text-transform:none;letter-spacing:0">drag to reorder</span></h4>
+                <button class="btn sm">＋ Add step</button>
+              </div>
+              <div class="card-body">
+                <div class="col" style="gap:10px">
+                  <div class="step">
+                    <div class="handle">⋮⋮</div>
+                    <div class="n">1</div>
+                    <div class="body">
+                      <div class="ttl">Sablé crust</div>
+                      <div class="desc">Sand butter with flour &amp; sugar. Add yolk + water. Rest 30 min cold. Roll &amp; blind-bake 12 min at 170°C.</div>
+                      <div class="meta"><span>⏱ 25 min</span><span>🌡 170°C</span><span class="add-img">＋ photo</span></div>
+                    </div>
+                  </div>
+                  <div class="step">
+                    <div class="handle">⋮⋮</div>
+                    <div class="n">2</div>
+                    <div class="body">
+                      <div class="ttl">Lemon curd</div>
+                      <div class="desc">Whisk eggs &amp; sugar. Add lemon juice. Cook bain-marie until 83°C. Off heat, whisk in butter cubes.</div>
+                      <div class="meta"><span>⏱ 15 min</span><span>🌡 83°C</span></div>
+                    </div>
+                  </div>
+                  <div class="step">
+                    <div class="handle">⋮⋮</div>
+                    <div class="n">3</div>
+                    <div class="body">
+                      <div class="ttl">Italian meringue</div>
+                      <div class="desc">Cook sugar syrup to 118°C. Pour onto whisking whites in a slow stream. Whip to room temperature.</div>
+                      <div class="meta"><span>⏱ 12 min</span><span>🌡 118°C</span></div>
+                    </div>
+                  </div>
+                  <div style="border:1px dashed var(--line-2);border-radius:var(--r);padding:14px;text-align:center;color:var(--muted);font-size:13px;cursor:pointer">＋ Add step 4</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- right rail -->
+          <aside class="rail">
+            <div class="card tint">
+              <span class="label" style="color:var(--acc-deep)">live cost</span>
+              <div class="row between" style="align-items:flex-end">
+                <div>
+                  <div class="h-display" style="font-size:48px;font-weight:900;color:var(--ink);margin-top:4px">€2.<em>40</em></div>
+                  <div class="mono tiny muted">per serving · €19.20 total</div>
+                </div>
+                <div class="mono tiny" style="color:var(--ok);font-weight:600">↓ €0.08 vs v2</div>
+              </div>
+              <div class="div"></div>
+              <div class="row between mono tiny" style="color:var(--ink-2)"><span>Food-cost</span><span class="num" style="font-weight:600">28%</span></div>
+              <div class="pbar acc" style="margin-top:6px;height:8px"><i style="width:75%"></i></div>
+              <div class="mono tiny muted" style="margin-top:4px">target ≤ 30%</div>
+              <div class="div dashed"></div>
+              <div class="row between"><span class="mono tiny" style="color:var(--ink-2)">Suggested menu price</span><span class="num" style="font-weight:600;font-size:14px">€8.50</span></div>
+            </div>
+
+            <div class="card padded-0">
+              <div class="card-h"><h4>Scale</h4></div>
+              <div class="card-body" style="padding:14px">
+                <div class="row between">
+                  <span style="font-size:13px;color:var(--ink-2)">Servings</span>
+                  <div class="row" style="gap:6px">
+                    <button class="btn sm" style="width:28px;padding:5px 0">−</button>
+                    <span class="h-display" style="font-size:24px;min-width:28px;text-align:center">8</span>
+                    <button class="btn sm" style="width:28px;padding:5px 0">＋</button>
+                  </div>
+                </div>
+                <div class="row" style="gap:4px;margin-top:10px">
+                  <span class="chip dashed sm">×2</span>
+                  <span class="chip dashed sm">×4</span>
+                  <span class="chip dashed sm">×10</span>
+                </div>
+                <div class="helper mono tiny muted" style="margin-top:8px;line-height:1.4">Scales ingredients, cost &amp; nutrition.<br/>Steps unchanged.</div>
+              </div>
+            </div>
+
+            <div class="card padded-0">
+              <div class="card-h"><h4>Nutrition <span class="meta" style="margin-left:6px;text-transform:none;letter-spacing:0">/ serving</span></h4></div>
+              <div class="card-body" style="padding:8px 16px">
+                <div class="col" style="gap:6px">
+                  <div class="row between" style="font-size:13px"><span class="muted">kcal</span><span class="num">312</span></div>
+                  <div class="row between" style="font-size:13px"><span class="muted">protein</span><span class="num">6 g</span></div>
+                  <div class="row between" style="font-size:13px"><span class="muted">carbs</span><span class="num">34 g</span></div>
+                  <div class="row between" style="font-size:13px;color:var(--muted)"><span class="muted" style="padding-left:12px">of which sugar</span><span class="num">22 g</span></div>
+                  <div class="row between" style="font-size:13px"><span class="muted">fats</span><span class="num">18 g</span></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card padded-0">
+              <div class="card-h"><h4>Allergens</h4></div>
+              <div class="card-body" style="padding:14px">
+                <div class="chip-row">
+                  <span class="allergen">milk</span>
+                  <span class="allergen">gluten</span>
+                  <span class="allergen">egg</span>
+                </div>
+                <div class="mono tiny muted" style="margin-top:8px;line-height:1.4">Rolled up automatically from ingredients.</div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================ -->
+<!-- 05 · INGREDIENTS                                                  -->
+<!-- ================================================================ -->
+<section class="screen" id="s5">
+  <div class="screen-label">
+    <span class="num">05</span>
+    <h3>Ingredients · master list</h3>
+    <span class="path">/app/ingredients · 1,184 items</span>
+  </div>
+  <p class="screen-note">
+    <b>Same vocabulary as recipes.</b> Filter chips on top, dense table below
+    with cost trend sparkline per row, supplier, allergen tags, used-in count.
+    Bulk-select to change supplier or category in one move.
+  </p>
+
+  <div class="frame">
+    <div class="frame-chrome"><div class="dots"><i></i><i></i><i></i></div><div class="url">corekitchen.app/ingredients</div><div class="url-spacer"></div></div>
+
+    <div class="app">
+      <aside class="sidenav">
+        <div class="brand"><div class="mark">c</div><div class="name">CoreKitchen</div></div>
+        <div class="ws"><span class="av">MR</span> Maison Renard <span class="caret">▾</span></div>
+        <div class="grp">Workspace</div>
+        <a href="#"><span class="ico">◯</span>Dashboard</a>
+        <a href="#"><span class="ico">▢</span>Recipes <span class="badge">342</span></a>
+        <a href="#" class="on"><span class="ico">◉</span>Ingredients <span class="badge">1.2k</span></a>
+        <a href="#"><span class="ico">▢</span>Suppliers</a>
+        <a href="#"><span class="ico">▢</span>Allergens</a>
+        <a href="#"><span class="ico">▢</span>Menus</a>
+        <div class="grp">Planning</div>
+        <a href="#" class="dim"><span class="ico">▢</span>Production</a>
+        <a href="#" class="dim"><span class="ico">▢</span>Stock</a>
+        <a href="#" class="dim"><span class="ico">▢</span>Analytics</a>
+        <div class="grp">Team</div>
+        <a href="#"><span class="ico">▢</span>Members</a>
+        <a href="#"><span class="ico">▢</span>Settings</a>
+        <div class="foot">
+          <div class="av cr" style="width:30px;height:30px;border-radius:50%">CR</div>
+          <div><div class="who">Camille Renard</div><div class="role">Head chef</div></div>
+        </div>
+      </aside>
+
+      <div class="main">
+        <div class="topbar">
+          <div class="crumb">Workspace · <b>Ingredients</b></div>
+          <div class="input search empty" style="max-width:380px;margin-left:24px;flex:1"><span>Search by name, supplier, allergen…</span><span class="kbd-row"><span class="kbd">⌘</span><span class="kbd">K</span></span></div>
+          <div class="top-right">
+            <button class="btn sm ghost">🔔</button>
+            <button class="btn sm">＋ New</button>
+            <div class="av cr">CR</div>
+          </div>
+        </div>
+
+        <div class="content">
+          <div class="page-h">
+            <div>
+              <div class="eyebrow">1,184 items · 12 suppliers · 8 categories</div>
+              <h2 class="h-display" style="font-size:36px;font-weight:900;margin-top:4px">Ingredients</h2>
+            </div>
+            <div class="btn-row">
+              <button class="btn"><span class="ico">↥</span>Import CSV</button>
+              <button class="btn"><span class="ico">⤴</span>Export</button>
+              <button class="btn accent">＋ New ingredient</button>
+            </div>
+          </div>
+
+          <!-- cost alert banner -->
+          <div class="card" style="background:linear-gradient(90deg,#d8edcf 0%,#f0f7ed 100%);border-color:var(--acc-soft-2);padding:14px 18px;display:flex;align-items:center;gap:14px">
+            <div style="width:36px;height:36px;border-radius:50%;background:var(--acc);color:#fff;display:grid;place-items:center;font-family:var(--serif);font-weight:900;font-size:16px;flex:0 0 36px">!</div>
+            <div class="flex1">
+              <div style="font-weight:600;color:var(--ink);font-size:14px">3 ingredients had cost movements over 10% this week</div>
+              <div class="mono tiny" style="color:var(--ink-2);margin-top:2px">Butter +18% · Lemon +12% · Vanilla pod +9% — review impact on 184 recipes.</div>
+            </div>
+            <button class="btn sm accent">Review impacts →</button>
+          </div>
+
+          <div class="card" style="padding:14px 16px">
+            <div class="row wrap" style="gap:10px">
+              <div class="input search empty" style="flex:1;min-width:240px;max-width:340px"><span>Search ingredients…</span></div>
+              <div class="chip-row">
+                <span class="chip on">All <span class="ct">1184</span></span>
+                <span class="chip">Dairy <span class="ct">142</span></span>
+                <span class="chip">Flour &amp; grains <span class="ct">98</span></span>
+                <span class="chip">Meat <span class="ct">76</span></span>
+                <span class="chip">Fish</span>
+                <span class="chip">Produce</span>
+                <span class="chip">Spices</span>
+                <span class="chip">Pastry</span>
+                <span class="chip dashed">＋ more</span>
+              </div>
+              <span style="flex:1"></span>
+              <span class="chip dashed">supplier ▾</span>
+              <span class="chip dashed">allergen ▾</span>
+            </div>
+          </div>
+
+          <div class="card padded-0">
+            <table class="tbl">
+              <thead><tr>
+                <th style="width:32px"><span class="check"></span></th>
+                <th>Name ↕</th>
+                <th>Category</th>
+                <th>Unit</th>
+                <th>Cost / unit ↕</th>
+                <th>Trend · 30d</th>
+                <th>Allergens</th>
+                <th>Supplier</th>
+                <th>Used in</th>
+                <th></th>
+              </tr></thead>
+              <tbody>
+                <tr>
+                  <td><span class="check"></span></td>
+                  <td class="pri">Butter, unsalted AOP</td>
+                  <td><span class="chip sm">Dairy</span></td>
+                  <td>kg</td>
+                  <td class="num">€8.40</td>
+                  <td><svg class="spark" viewBox="0 0 80 24" preserveAspectRatio="none" style="width:80px"><path class="line" d="M0,18 L10,17 L20,16 L30,15 L40,12 L50,10 L60,8 L70,6 L80,3" style="stroke:#b8412e"/></svg><span class="mono tiny" style="color:var(--bad)">+18%</span></td>
+                  <td><span class="allergen">milk</span></td>
+                  <td>Beillevaire</td>
+                  <td class="num">184</td>
+                  <td class="row-actions">⋯</td>
+                </tr>
+                <tr>
+                  <td><span class="check"></span></td>
+                  <td class="pri">Flour, T55</td>
+                  <td><span class="chip sm">Flour</span></td>
+                  <td>kg</td>
+                  <td class="num">€1.20</td>
+                  <td><svg class="spark" viewBox="0 0 80 24" preserveAspectRatio="none" style="width:80px"><path class="line" d="M0,14 L10,15 L20,14 L30,15 L40,14 L50,15 L60,14 L70,14 L80,14"/></svg><span class="mono tiny muted">flat</span></td>
+                  <td><span class="allergen">gluten</span></td>
+                  <td>Moulins Bourgeois</td>
+                  <td class="num">161</td>
+                  <td class="row-actions">⋯</td>
+                </tr>
+                <tr>
+                  <td><span class="check"></span></td>
+                  <td class="pri">Cocoa powder, 70%</td>
+                  <td><span class="chip sm">Pastry</span></td>
+                  <td>kg</td>
+                  <td class="num">€18.00</td>
+                  <td><svg class="spark" viewBox="0 0 80 24" preserveAspectRatio="none" style="width:80px"><path class="line" d="M0,12 L10,13 L20,11 L30,12 L40,10 L50,11 L60,9 L70,10 L80,8" style="stroke:#3f7a4a"/></svg><span class="mono tiny" style="color:var(--ok)">−2%</span></td>
+                  <td>—</td>
+                  <td>Valrhona</td>
+                  <td class="num">42</td>
+                  <td class="row-actions">⋯</td>
+                </tr>
+                <tr>
+                  <td><span class="check"></span></td>
+                  <td class="pri">Egg, whole, L</td>
+                  <td><span class="chip sm">Dairy</span></td>
+                  <td>unit</td>
+                  <td class="num">€0.32</td>
+                  <td><svg class="spark" viewBox="0 0 80 24" preserveAspectRatio="none" style="width:80px"><path class="line" d="M0,14 L10,14 L20,13 L30,14 L40,13 L50,12 L60,13 L70,12 L80,12"/></svg><span class="mono tiny muted">+1%</span></td>
+                  <td><span class="allergen">egg</span></td>
+                  <td>Ferme Loubières</td>
+                  <td class="num">131</td>
+                  <td class="row-actions">⋯</td>
+                </tr>
+                <tr>
+                  <td><span class="check"></span></td>
+                  <td class="pri">Lemon, fresh (Menton)</td>
+                  <td><span class="chip sm">Produce</span></td>
+                  <td>kg</td>
+                  <td class="num">€3.80</td>
+                  <td><svg class="spark" viewBox="0 0 80 24" preserveAspectRatio="none" style="width:80px"><path class="line" d="M0,16 L10,16 L20,15 L30,14 L40,13 L50,12 L60,11 L70,9 L80,7" style="stroke:#b8412e"/></svg><span class="mono tiny" style="color:var(--bad)">+12%</span></td>
+                  <td>—</td>
+                  <td>Marché Halles</td>
+                  <td class="num">22</td>
+                  <td class="row-actions">⋯</td>
+                </tr>
+                <tr>
+                  <td><span class="check"></span></td>
+                  <td class="pri">Lobster, live</td>
+                  <td><span class="chip sm">Fish</span></td>
+                  <td>kg</td>
+                  <td class="num">€42.00</td>
+                  <td><svg class="spark" viewBox="0 0 80 24" preserveAspectRatio="none" style="width:80px"><path class="line" d="M0,12 L10,14 L20,11 L30,13 L40,10 L50,12 L60,9 L70,11 L80,9"/></svg><span class="mono tiny muted">±0%</span></td>
+                  <td><span class="allergen">crustacean</span></td>
+                  <td>Marée Atlantique</td>
+                  <td class="num">7</td>
+                  <td class="row-actions">⋯</td>
+                </tr>
+                <tr>
+                  <td><span class="check"></span></td>
+                  <td class="pri">Sugar, fine</td>
+                  <td><span class="chip sm">Dry goods</span></td>
+                  <td>kg</td>
+                  <td class="num">€0.95</td>
+                  <td><svg class="spark" viewBox="0 0 80 24" preserveAspectRatio="none" style="width:80px"><path class="line" d="M0,15 L10,15 L20,15 L30,15 L40,15 L50,15 L60,15 L70,15 L80,15"/></svg><span class="mono tiny muted">flat</span></td>
+                  <td>—</td>
+                  <td>Béghin-Say</td>
+                  <td class="num">142</td>
+                  <td class="row-actions">⋯</td>
+                </tr>
+                <tr>
+                  <td><span class="check"></span></td>
+                  <td class="pri">Cream, 35% UHT</td>
+                  <td><span class="chip sm">Dairy</span></td>
+                  <td>L</td>
+                  <td class="num">€4.20</td>
+                  <td><svg class="spark" viewBox="0 0 80 24" preserveAspectRatio="none" style="width:80px"><path class="line" d="M0,14 L10,13 L20,14 L30,13 L40,12 L50,13 L60,11 L70,12 L80,11"/></svg><span class="mono tiny" style="color:var(--bad)">+4%</span></td>
+                  <td><span class="allergen">milk</span></td>
+                  <td>Beillevaire</td>
+                  <td class="num">98</td>
+                  <td class="row-actions">⋯</td>
+                </tr>
+                <tr>
+                  <td><span class="check"></span></td>
+                  <td class="pri">Truffle, black (Périgord)</td>
+                  <td><span class="chip sm">Spices</span></td>
+                  <td>g</td>
+                  <td class="num">€1.40</td>
+                  <td><svg class="spark" viewBox="0 0 80 24" preserveAspectRatio="none" style="width:80px"><path class="line" d="M0,10 L10,12 L20,9 L30,11 L40,8 L50,10 L60,7 L70,9 L80,6"/></svg><span class="mono tiny" style="color:var(--bad)">+8%</span></td>
+                  <td>—</td>
+                  <td>Pébeyre</td>
+                  <td class="num">12</td>
+                  <td class="row-actions">⋯</td>
+                </tr>
+                <tr>
+                  <td><span class="check"></span></td>
+                  <td class="pri">Olive oil, EV (Castelas)</td>
+                  <td><span class="chip sm">Oils</span></td>
+                  <td>L</td>
+                  <td class="num">€11.80</td>
+                  <td><svg class="spark" viewBox="0 0 80 24" preserveAspectRatio="none" style="width:80px"><path class="line" d="M0,14 L10,13 L20,12 L30,13 L40,11 L50,12 L60,10 L70,11 L80,10"/></svg><span class="mono tiny muted">+2%</span></td>
+                  <td>—</td>
+                  <td>Castelas</td>
+                  <td class="num">68</td>
+                  <td class="row-actions">⋯</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="row between" style="padding:0 4px">
+            <div class="mono tiny muted">Showing 1–25 of 1,184 ingredients</div>
+            <div class="row" style="gap:4px">
+              <button class="btn sm ghost">← Prev</button>
+              <button class="btn sm" style="background:var(--ink);color:#fff;border-color:var(--ink);min-width:30px;padding:5px 8px">1</button>
+              <button class="btn sm ghost" style="min-width:30px;padding:5px 8px">2</button>
+              <button class="btn sm ghost" style="min-width:30px;padding:5px 8px">3</button>
+              <span class="mono tiny muted" style="padding:0 6px">…</span>
+              <button class="btn sm ghost" style="min-width:30px;padding:5px 8px">48</button>
+              <button class="btn sm ghost">Next →</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================ -->
+<!-- 06 · TEAM & SETTINGS                                              -->
+<!-- ================================================================ -->
+<section class="screen" id="s6">
+  <div class="screen-label">
+    <span class="num">06</span>
+    <h3>Team &amp; settings</h3>
+    <span class="path">/app/settings/team · roles · invites</span>
+  </div>
+  <p class="screen-note">
+    <b>Settings sub-nav lives inside the page.</b> Same pattern works for any
+    future area. Members table with role chips, pending invites, role defaults
+    summary, and notification preferences side-by-side.
+  </p>
+
+  <div class="frame">
+    <div class="frame-chrome"><div class="dots"><i></i><i></i><i></i></div><div class="url">corekitchen.app/settings/team</div><div class="url-spacer"></div></div>
+
+    <div class="app">
+      <aside class="sidenav">
+        <div class="brand"><div class="mark">c</div><div class="name">CoreKitchen</div></div>
+        <div class="ws"><span class="av">MR</span> Maison Renard <span class="caret">▾</span></div>
+        <div class="grp">Workspace</div>
+        <a href="#"><span class="ico">◯</span>Dashboard</a>
+        <a href="#"><span class="ico">▢</span>Recipes <span class="badge">342</span></a>
+        <a href="#"><span class="ico">▢</span>Ingredients <span class="badge">1.2k</span></a>
+        <a href="#"><span class="ico">▢</span>Suppliers</a>
+        <a href="#"><span class="ico">▢</span>Allergens</a>
+        <a href="#"><span class="ico">▢</span>Menus</a>
+        <div class="grp">Planning</div>
+        <a href="#" class="dim"><span class="ico">▢</span>Production</a>
+        <a href="#" class="dim"><span class="ico">▢</span>Stock</a>
+        <a href="#" class="dim"><span class="ico">▢</span>Analytics</a>
+        <div class="grp">Team</div>
+        <a href="#"><span class="ico">▢</span>Members</a>
+        <a href="#" class="on"><span class="ico">◉</span>Settings</a>
+        <div class="foot">
+          <div class="av cr" style="width:30px;height:30px;border-radius:50%">CR</div>
+          <div><div class="who">Camille Renard</div><div class="role">Head chef</div></div>
+        </div>
+      </aside>
+
+      <div class="main">
+        <div class="topbar">
+          <div class="crumb">Settings · <b>Team &amp; roles</b></div>
+          <div class="top-right">
+            <button class="btn sm ghost">🔔</button>
+            <div class="av cr">CR</div>
+          </div>
+        </div>
+
+        <div class="content" style="flex-direction:row;align-items:flex-start;gap:24px;padding:24px">
+          <aside class="subnav">
+            <div class="mono tiny muted" style="padding:0 12px 4px;text-transform:uppercase;letter-spacing:.12em;font-weight:500">Account</div>
+            <a href="#"><span class="ico">●</span>Profile</a>
+            <a href="#"><span class="ico">●</span>Password &amp; security</a>
+            <div class="mono tiny muted" style="padding:14px 12px 4px;text-transform:uppercase;letter-spacing:.12em;font-weight:500">Kitchen</div>
+            <a href="#"><span class="ico">●</span>Company</a>
+            <a href="#" class="on"><span class="ico">●</span>Team &amp; roles</a>
+            <a href="#"><span class="ico">●</span>Notifications</a>
+            <div class="mono tiny muted" style="padding:14px 12px 4px;text-transform:uppercase;letter-spacing:.12em;font-weight:500">Plan</div>
+            <a href="#"><span class="ico">●</span>Billing</a>
+            <a href="#"><span class="ico">●</span>API keys</a>
+            <a href="#"><span class="ico">●</span>Integrations</a>
+          </aside>
+
+          <div class="flex1 col" style="gap:18px">
+            <div class="page-h">
+              <div>
+                <div class="eyebrow">4 active · 2 invites pending</div>
+                <h2 class="h-display" style="font-size:32px;font-weight:900;margin-top:4px">Team &amp; <em>roles</em></h2>
+                <div class="sub" style="margin-top:6px">Invite chefs and editors. Set what each role can see and change.</div>
+              </div>
+              <div class="btn-row">
+                <button class="btn">Permissions matrix</button>
+                <button class="btn accent">＋ Invite member</button>
+              </div>
+            </div>
+
+            <!-- members card -->
+            <div class="card padded-0">
+              <div class="card-h">
+                <h4>Members</h4>
+                <div class="chip-row">
+                  <span class="chip on">All <span class="ct">6</span></span>
+                  <span class="chip">Active <span class="ct">4</span></span>
+                  <span class="chip">Invited <span class="ct">2</span></span>
+                  <span class="chip dashed">Archived</span>
+                </div>
+              </div>
+              <table class="tbl">
+                <thead><tr>
+                  <th style="width:32px"><span class="check"></span></th>
+                  <th>Member</th>
+                  <th>Email</th>
+                  <th>Role</th>
+                  <th>Last active</th>
+                  <th>Recipes</th>
+                  <th></th>
+                </tr></thead>
+                <tbody>
+                  <tr>
+                    <td><span class="check"></span></td>
+                    <td><div class="row" style="gap:10px"><span class="av cr">CR</span><div><div style="font-weight:600;color:var(--ink);font-size:13px">Camille Renard</div><div class="mono tiny muted">you</div></div></div></td>
+                    <td class="mono tiny" style="color:var(--ink-2)"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="9bf8faf6f2f7f7fedbf6faf2e8f4f5b6e9fef5fae9ffb5fde9">[email&#160;protected]</a></td>
+                    <td><span class="pill" style="background:#3a4a38;color:#c8e3be;border-color:#3a4a38">owner</span></td>
+                    <td><span class="mono tiny" style="color:var(--ok)">● now</span></td>
+                    <td class="num">142</td>
+                    <td class="row-actions">⋯</td>
+                  </tr>
+                  <tr>
+                    <td><span class="check"></span></td>
+                    <td><div class="row" style="gap:10px"><span class="av jm">JM</span><div><div style="font-weight:600;color:var(--ink);font-size:13px">Julien Marin</div><div class="mono tiny muted">head bakery</div></div></div></td>
+                    <td class="mono tiny" style="color:var(--ink-2)"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5d3728313438331d303c342e3233702f38333c2f39733b2f">[email&#160;protected]</a></td>
+                    <td><span class="pill info">chef</span></td>
+                    <td class="mono tiny muted">2 h ago</td>
+                    <td class="num">88</td>
+                    <td class="row-actions">⋯</td>
+                  </tr>
+                  <tr>
+                    <td><span class="check"></span></td>
+                    <td><div class="row" style="gap:10px"><span class="av pl">PL</span><div><div style="font-weight:600;color:var(--ink);font-size:13px">Pauline Leroy</div><div class="mono tiny muted">pastry · pm</div></div></div></td>
+                    <td class="mono tiny" style="color:var(--ink-2)"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0b7b6a7e6762656e4b666a6278646526796e656a796f256d79">[email&#160;protected]</a></td>
+                    <td><span class="pill info">editor</span></td>
+                    <td class="mono tiny muted">yesterday</td>
+                    <td class="num">42</td>
+                    <td class="row-actions">⋯</td>
+                  </tr>
+                  <tr>
+                    <td><span class="check"></span></td>
+                    <td><div class="row" style="gap:10px"><span class="av ra">RA</span><div><div style="font-weight:600;color:var(--ink);font-size:13px">Reza Akhavan</div><div class="mono tiny muted">front of house</div></div></div></td>
+                    <td class="mono tiny" style="color:var(--ink-2)"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6113041b00210c0008120e0f4c13040f0013054f0713">[email&#160;protected]</a></td>
+                    <td><span class="pill muted">viewer</span></td>
+                    <td class="mono tiny muted">5 days ago</td>
+                    <td class="num">—</td>
+                    <td class="row-actions">⋯</td>
+                  </tr>
+                  <tr style="background:var(--paper)">
+                    <td><span class="check"></span></td>
+                    <td><div class="row" style="gap:10px"><span class="av outline">MR</span><div><div style="font-weight:500;color:var(--ink-2);font-size:13px">Marc Rouvier</div><div class="mono tiny muted">invited 3 days ago</div></div></div></td>
+                    <td class="mono tiny" style="color:var(--ink-2)"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="620f031001220f030b110d0c4f10070c0310064c0410">[email&#160;protected]</a></td>
+                    <td><span class="pill info">editor</span></td>
+                    <td><span class="pill draft">pending</span></td>
+                    <td class="num">—</td>
+                    <td class="row-actions"><span class="mono tiny" style="color:var(--acc)">resend ↗</span></td>
+                  </tr>
+                  <tr style="background:var(--paper)">
+                    <td><span class="check"></span></td>
+                    <td><div class="row" style="gap:10px"><span class="av outline">MT</span><div><div style="font-weight:500;color:var(--ink-2);font-size:13px">Marie Tournier</div><div class="mono tiny muted">invited yesterday</div></div></div></td>
+                    <td class="mono tiny" style="color:var(--ink-2)"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="177a76657e72577a767e6478793a657279766573397165">[email&#160;protected]</a></td>
+                    <td><span class="pill muted">viewer</span></td>
+                    <td><span class="pill draft">pending</span></td>
+                    <td class="num">—</td>
+                    <td class="row-actions"><span class="mono tiny" style="color:var(--acc)">resend ↗</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- two side cards -->
+            <div class="grid g2">
+              <div class="card padded-0">
+                <div class="card-h"><h4>Role defaults</h4><button class="btn sm ghost">＋ Custom role</button></div>
+                <div class="card-body" style="padding:14px 20px">
+                  <div class="col" style="gap:12px">
+                    <div class="row between">
+                      <div>
+                        <div style="font-weight:600;font-size:13px;color:var(--ink)">Owner</div>
+                        <div class="mono tiny muted" style="margin-top:2px">Full access · billing · invites</div>
+                      </div>
+                      <span class="pill" style="background:#3a4a38;color:#c8e3be;border-color:#3a4a38">1</span>
+                    </div>
+                    <div class="div dashed"></div>
+                    <div class="row between">
+                      <div>
+                        <div style="font-weight:600;font-size:13px;color:var(--ink)">Chef</div>
+                        <div class="mono tiny muted" style="margin-top:2px">Edit recipes &amp; ingredients · invite editors</div>
+                      </div>
+                      <span class="pill info">1</span>
+                    </div>
+                    <div class="div dashed"></div>
+                    <div class="row between">
+                      <div>
+                        <div style="font-weight:600;font-size:13px;color:var(--ink)">Editor</div>
+                        <div class="mono tiny muted" style="margin-top:2px">Create &amp; edit recipes · no ingredients catalog</div>
+                      </div>
+                      <span class="pill info">2</span>
+                    </div>
+                    <div class="div dashed"></div>
+                    <div class="row between">
+                      <div>
+                        <div style="font-weight:600;font-size:13px;color:var(--ink)">Viewer</div>
+                        <div class="mono tiny muted" style="margin-top:2px">Read-only · cooking mode · print sheets</div>
+                      </div>
+                      <span class="pill muted">1</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card padded-0">
+                <div class="card-h"><h4>Notifications</h4><span class="meta">for your account</span></div>
+                <div class="card-body" style="padding:14px 20px">
+                  <div class="col" style="gap:14px">
+                    <div class="row between">
+                      <div>
+                        <div style="font-weight:600;font-size:13px;color:var(--ink)">Cost alerts</div>
+                        <div class="mono tiny muted" style="margin-top:2px">when an ingredient moves &gt; 10%</div>
+                      </div>
+                      <span class="tgl on"></span>
+                    </div>
+                    <div class="row between">
+                      <div>
+                        <div style="font-weight:600;font-size:13px;color:var(--ink)">Weekly digest</div>
+                        <div class="mono tiny muted" style="margin-top:2px">food-cost &amp; activity summary · monday 7am</div>
+                      </div>
+                      <span class="tgl on"></span>
+                    </div>
+                    <div class="row between">
+                      <div>
+                        <div style="font-weight:600;font-size:13px;color:var(--ink)">Comments on recipes</div>
+                        <div class="mono tiny muted" style="margin-top:2px">when someone @mentions you</div>
+                      </div>
+                      <span class="tgl"></span>
+                    </div>
+                    <div class="row between">
+                      <div>
+                        <div style="font-weight:600;font-size:13px;color:var(--ink)">Product updates</div>
+                        <div class="mono tiny muted" style="margin-top:2px">monthly · new features &amp; tips</div>
+                      </div>
+                      <span class="tgl"></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div><!-- /stage -->
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+</html>

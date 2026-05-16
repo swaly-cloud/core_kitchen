@@ -1,6 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
-import { ingredientsApi, type IngredientListParams } from '@/lib/api/ingredients';
+import { ingredientsApi, type IngredientListParams, type UsdaFood } from '@/lib/api/ingredients';
 import type { CreateIngredientRequest, UpdateIngredientRequest } from '@/types';
 
 export function useIngredients(params: IngredientListParams = {}) {
@@ -58,5 +58,21 @@ export function useDeleteIngredient() {
     onError: () => {
       toast.error('Erreur lors de la suppression');
     },
+  });
+}
+
+export function useSearchUsda(query: string, pageNumber = 0, pageSize = 20) {
+  return useQuery({
+    queryKey: ['usda-search', query, pageNumber, pageSize],
+    queryFn: () => ingredientsApi.searchUsda(query, pageNumber, pageSize),
+    enabled: query.length > 0,
+  });
+}
+
+export function useUsdaFood(fdcId: string | null) {
+  return useQuery({
+    queryKey: ['usda-food', fdcId],
+    queryFn: () => ingredientsApi.getUsdaFood(fdcId!),
+    enabled: !!fdcId,
   });
 }
