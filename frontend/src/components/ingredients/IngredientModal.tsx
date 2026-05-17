@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -17,7 +17,7 @@ import { Input } from '@/components/ui/Input';
 import { Select } from '@/components/ui/Select';
 import { FormField } from '@/components/ui/FormField';
 import { ALLERGEN_LABELS } from './AllergenBadge';
-import { useCreateIngredient, useUpdateIngredient, useSearchUsda } from '@/hooks/useIngredients';
+import { useCreateIngredient, useUpdateIngredient } from '@/hooks/useIngredients';
 import type { Ingredient, Unit, Allergen } from '@/types';
 
 const UNITS: { value: Unit; label: string }[] = [
@@ -34,9 +34,9 @@ const UNITS: { value: Unit; label: string }[] = [
 const ALL_ALLERGENS = Object.keys(ALLERGEN_LABELS) as Allergen[];
 
 const schema = z.object({
-  name: z.string().min(1, 'Le nom est requis'),
+  name: z.string().min(1, 'Name is required'),
   unit: z.enum(['KG', 'G', 'L', 'ML', 'CL', 'PIECE', 'BUNCH', 'PORTION'] as const),
-  costPerUnit: z.coerce.number().min(0, 'Le coût doit être positif'),
+  costPerUnit: z.coerce.number().min(0, 'Cost must be positive'),
   category: z.string().optional(),
   supplier: z.string().optional(),
   allergens: z.array(z.enum(['GLUTEN', 'CRUSTACEANS', 'EGGS', 'FISH', 'PEANUTS', 'SOYBEANS', 'MILK', 'NUTS', 'CELERY', 'MUSTARD', 'SESAME', 'SULPHITES', 'LUPIN', 'MOLLUSCS'] as const)).optional(),
@@ -48,14 +48,12 @@ interface IngredientModalProps {
   open: boolean;
   onClose: () => void;
   ingredient?: Ingredient;
+  /** Pre-filled name from USDA import */
+  initialName?: string;
 }
 
-export function IngredientModal({ open, onClose, ingredient }: IngredientModalProps) {
+export function IngredientModal({ open, onClose, ingredient, initialName }: IngredientModalProps) {
   const isEdit = !!ingredient;
-  const [tab, setTab] = useState<'manual' | 'usda'>('manual');
-  const [usdaQuery, setUsdaQuery] = useState('');
-  const { data: usdaResults, isLoading: usdaLoading } = useSearchUsda(usdaQuery);
-
   const createMutation = useCreateIngredient();
   const updateMutation = useUpdateIngredient();
   const isPending = createMutation.isPending || updateMutation.isPending;
@@ -65,7 +63,6 @@ export function IngredientModal({ open, onClose, ingredient }: IngredientModalPr
     handleSubmit,
     control,
     reset,
-    setValue,
     formState: { errors },
   } = useForm<FormValues>({
     resolver: zodResolver(schema),
@@ -91,7 +88,7 @@ export function IngredientModal({ open, onClose, ingredient }: IngredientModalPr
       });
     } else if (open && !ingredient) {
       reset({
-        name: '',
+        name: initialName ?? '',
         unit: 'KG',
         costPerUnit: 0,
         category: '',
@@ -99,13 +96,7 @@ export function IngredientModal({ open, onClose, ingredient }: IngredientModalPr
         allergens: [],
       });
     }
-  }, [open, ingredient, reset]);
-
-  const handleSelectUsda = (result: any) => {
-    setValue('name', result.name);
-    setTab('manual');
-    setUsdaQuery('');
-  };
+  }, [open, ingredient, initialName, reset]);
 
   const onSubmit = async (values: FormValues) => {
     const payload = {
@@ -130,78 +121,19 @@ export function IngredientModal({ open, onClose, ingredient }: IngredientModalPr
       <DialogContent className="max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>
-            {isEdit ? 'Edit ingredient' : 'New ingredient'}
+            {isEdit ? 'Edit ingredient' : initialName ? `Import "${initialName}"` : 'New ingredient'}
           </DialogTitle>
           <DialogCloseButton onClose={onClose} />
         </DialogHeader>
 
-        {!isEdit && (
-          <div className="flex gap-2 border-b border-stone-200 px-6">
-            <button
-              type="button"
-              onClick={() => setTab('manual')}
-              className={`px-3 py-3 text-sm font-medium border-b-2 transition-colors ${
-                tab === 'manual'
-                  ? 'border-brand-500 text-brand-600'
-                  : 'border-transparent text-stone-500 hover:text-stone-700'
-              }`}
-            >
-              Manual entry
-            </button>
-            <button
-              type="button"
-              onClick={() => setTab('usda')}
-              className={`px-3 py-3 text-sm font-medium border-b-2 transition-colors ${
-                tab === 'usda'
-                  ? 'border-brand-500 text-brand-600'
-                  : 'border-transparent text-stone-500 hover:text-stone-700'
-              }`}
-            >
-              Search USDA
-            </button>
-          </div>
-        )}
-
-        {tab === 'usda' && !isEdit && (
-          <div className="space-y-4 px-6 py-6">
-            <FormField id="usda-search" label="Search USDA FoodData Central">
-              <Input
-                id="usda-search"
-                placeholder="e.g., Cheddar cheese, butter..."
-                value={usdaQuery}
-                onChange={(e) => setUsdaQuery(e.target.value)}
-              />
-            </FormField>
-
-            {usdaLoading && (
-              <div className="text-center py-4 text-stone-500">Loading...</div>
-            )}
-
-            {usdaResults && usdaResults.length === 0 && usdaQuery && (
-              <div className="text-center py-4 text-stone-500">No results found</div>
-            )}
-
-            {usdaResults && usdaResults.length > 0 && (
-              <div className="space-y-2 max-h-96 overflow-y-auto">
-                {usdaResults.map((result) => (
-                  <button
-                    key={result.fdcId}
-                    type="button"
-                    onClick={() => handleSelectUsda(result)}
-                    className="w-full text-left p-3 rounded-lg border border-stone-200 hover:bg-stone-50 transition-colors"
-                  >
-                    <div className="font-medium text-stone-900">{result.name}</div>
-                    <div className="text-xs text-stone-500 mt-1">{result.dataType}</div>
-                  </button>
-                ))}
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className="space-y-5 px-6 py-6">
+            {initialName && !isEdit && (
+              <div className="rounded-lg border border-brand-200 bg-brand-50/60 px-4 py-3 text-sm text-brand-700">
+                Imported from USDA FoodData Central — complete the cost and unit fields.
               </div>
             )}
-          </div>
-        )}
 
-        <form onSubmit={handleSubmit(onSubmit)}>
-          {tab === 'manual' && (
-            <div className="space-y-5 px-6 py-6">
             <FormField id="name" label="Name *" error={errors.name?.message}>
               <Input
                 id="name"
@@ -292,9 +224,7 @@ export function IngredientModal({ open, onClose, ingredient }: IngredientModalPr
                               if (e.target.checked) {
                                 field.onChange([...current, allergen]);
                               } else {
-                                field.onChange(
-                                  current.filter((a) => a !== allergen)
-                                );
+                                field.onChange(current.filter((a) => a !== allergen));
                               }
                             }}
                           />
@@ -309,23 +239,20 @@ export function IngredientModal({ open, onClose, ingredient }: IngredientModalPr
               />
             </div>
           </div>
-          )}
 
-          {tab === 'manual' && (
-            <DialogFooter>
-              <Button
-                type="button"
-                variant="secondary"
-                onClick={onClose}
-                disabled={isPending}
-              >
-                Cancel
-              </Button>
-              <Button type="submit" loading={isPending}>
-                {isEdit ? 'Save changes' : 'Create ingredient'}
-              </Button>
-            </DialogFooter>
-          )}
+          <DialogFooter>
+            <Button
+              type="button"
+              variant="secondary"
+              onClick={onClose}
+              disabled={isPending}
+            >
+              Cancel
+            </Button>
+            <Button type="submit" loading={isPending}>
+              {isEdit ? 'Save changes' : 'Add ingredient'}
+            </Button>
+          </DialogFooter>
         </form>
       </DialogContent>
     </Dialog>
