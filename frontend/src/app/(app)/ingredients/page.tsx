@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useRef } from 'react';
 import {
   Plus,
   Search,
@@ -15,6 +15,8 @@ import {
   Database,
   Import,
   Loader2,
+  CheckCircle2,
+  AlertCircle,
 } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
@@ -22,6 +24,8 @@ import { Badge } from '@/components/ui/Badge';
 import { AllergenBadge } from '@/components/ingredients/AllergenBadge';
 import { IngredientModal } from '@/components/ingredients/IngredientModal';
 import { useIngredients, useDeleteIngredient, useSearchUsda } from '@/hooks/useIngredients';
+import { ingredientsApi } from '@/lib/api/ingredients';
+import { useQueryClient } from '@tanstack/react-query';
 import { cn } from '@/lib/utils';
 import type { Ingredient, Unit } from '@/types';
 
@@ -180,6 +184,10 @@ export default function IngredientsPage() {
   const [editingIngredient, setEditingIngredient] = useState<Ingredient | undefined>(undefined);
   const [importName, setImportName] = useState<string | undefined>(undefined);
   const [selected, setSelected] = useState<Set<string>>(new Set());
+  const [csvUploading, setCsvUploading] = useState(false);
+  const [csvResult, setCsvResult] = useState<{ imported: number; skipped: number } | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const queryClient = useQueryClient();
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -215,6 +223,33 @@ export default function IngredientsPage() {
     setEditingIngredient(undefined);
     setImportName(name);
     setModalOpen(true);
+  };
+
+  const handleCsvUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setCsvUploading(true);
+    setCsvResult(null);
+    try {
+      const result = await ingredientsApi.importCsv(file);
+      setCsvResult(result);
+      queryClient.invalidateQueries({ queryKey: ['ingredients'] });
+    } catch {
+      setCsvResult({ imported: 0, skipped: -1 });
+    } finally {
+      setCsvUploading(false);
+      if (fileInputRef.current) fileInputRef.current.value = '';
+    }
+  };
+
+  const handleDownloadTemplate = async () => {
+    const blob = await ingredientsApi.downloadTemplate();
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'ingredients_template.csv';
+    a.click();
+    URL.revokeObjectURL(url);
   };
 
   const closeModal = () => {
@@ -274,11 +309,24 @@ export default function IngredientsPage() {
           </h1>
         </div>
         <div className="flex flex-wrap items-center gap-2">
-          <Button variant="secondary" size="sm">
+          {/* hidden file input */}
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept=".csv"
+            className="hidden"
+            onChange={handleCsvUpload}
+          />
+          <Button
+            variant="secondary"
+            size="sm"
+            onClick={() => fileInputRef.current?.click()}
+            loading={csvUploading}
+          >
             <Upload className="h-3.5 w-3.5" /> Import CSV
           </Button>
-          <Button variant="secondary" size="sm">
-            <Download className="h-3.5 w-3.5" /> Export
+          <Button variant="secondary" size="sm" onClick={handleDownloadTemplate}>
+            <Download className="h-3.5 w-3.5" /> Template
           </Button>
           <Button onClick={openCreate} size="sm">
             <Plus className="h-3.5 w-3.5" /> New ingredient
@@ -302,6 +350,39 @@ export default function IngredientsPage() {
           Review impacts <ArrowRight className="h-3.5 w-3.5" />
         </Button>
       </div>
+
+      {/* CSV import result banner */}
+      {csvResult && (
+        <div className={cn(
+          'rounded-2xl border px-5 py-4 flex items-center justify-between gap-3',
+          csvResult.skipped === -1
+            ? 'border-red-200 bg-red-50/60'
+            : 'border-brand-200 bg-brand-50/60'
+        )}>
+          <div className="flex items-center gap-3">
+            {csvResult.skipped === -1 ? (
+              <AlertCircle className="h-5 w-5 text-danger shrink-0" />
+            ) : (
+              <CheckCircle2 className="h-5 w-5 text-brand-600 shrink-0" />
+            )}
+            <div>
+              {csvResult.skipped === -1 ? (
+                <p className="font-medium text-stone-900">Import failed — check the file format.</p>
+              ) : (
+                <>
+                  <p className="font-medium text-stone-900">
+                    {csvResult.imported} ingredient{csvResult.imported !== 1 ? 's' : ''} imported successfully
+                  </p>
+                  {csvResult.skipped > 0 && (
+                    <p className="text-sm text-stone-500 mt-0.5">{csvResult.skipped} rows skipped (invalid data)</p>
+                  )}
+                </>
+              )}
+            </div>
+          </div>
+          <button onClick={() => setCsvResult(null)} className="text-stone-400 hover:text-stone-600 text-xl leading-none">&times;</button>
+        </div>
+      )}
 
       {/* Tabs */}
       <div className="flex gap-1 border-b border-stone-200">

@@ -49,4 +49,17 @@ export const ingredientsApi = {
     }).then(r => r.data),
   getUsdaFood: (fdcId: string) =>
     api.get<UsdaFood>(`/api/ingredients/usda/${fdcId}`).then(r => r.data),
+
+  // CSV import
+  importCsv: (file: File) => {
+    const form = new FormData();
+    form.append('file', file);
+    return api.post<{ imported: number; skipped: number }>(
+      '/api/ingredients/import/csv',
+      form,
+      { headers: { 'Content-Type': 'multipart/form-data' } }
+    ).then(r => r.data);
+  },
+  downloadTemplate: () =>
+    api.get('/api/ingredients/import/template', { responseType: 'blob' }).then(r => r.data),
 };
