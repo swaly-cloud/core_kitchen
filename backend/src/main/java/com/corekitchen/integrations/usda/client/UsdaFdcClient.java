@@ -12,7 +12,10 @@ import org.springframework.web.client.RestClientException;
 public class UsdaFdcClient {
 
     private static final String USDA_API_BASE_URL = "https://api.nal.usda.gov/fdc/v1";
-    private static final String API_KEY = "DEMO_KEY";
+
+    @org.springframework.beans.factory.annotation.Value("${usda.api.key:DEMO_KEY}")
+    private String apiKey;
+
     private final RestClient restClient;
 
     public UsdaFdcClient(RestClient.Builder restClientBuilder) {
@@ -26,7 +29,7 @@ public class UsdaFdcClient {
             return restClient.get()
                 .uri(uriBuilder -> uriBuilder
                     .path("/foods/search")
-                    .queryParam("api_key", API_KEY)
+                    .queryParam("api_key", apiKey)
                     .queryParam("query", query)
                     .queryParam("pageNumber", pageNumber)
                     .queryParam("pageSize", pageSize)
@@ -44,7 +47,7 @@ public class UsdaFdcClient {
             return restClient.get()
                 .uri(uriBuilder -> uriBuilder
                     .path("/food/{fdcId}")
-                    .queryParam("api_key", API_KEY)
+                    .queryParam("api_key", apiKey)
                     .build(fdcId))
                 .retrieve()
                 .body(UsdaFood.class);
